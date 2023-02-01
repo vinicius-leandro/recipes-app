@@ -25,6 +25,5 @@ yarn-error.log*
 .vscode
 
 
-cypress/screenshots/
-cypress/videos/
-cypress/reports
+cypress
+cypress.json
