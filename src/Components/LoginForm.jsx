@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { checkLocalStorage, saveLocalStorage } from '../Service/storage';
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const [isDisabled, setIsDisabled] = useState(true);
   const [loginFormData, setLoginFormData] = useState({ email: '', password: '' });
 
@@ -17,6 +20,17 @@ export default function LoginForm() {
 
   const handleChange = ({ target: { name, value } }) => {
     setLoginFormData({ ...loginFormData, [name]: value });
+  };
+
+  const handleClick = () => {
+    const { email } = loginFormData;
+
+    checkLocalStorage('user', 'mealsToken', 'cocktailsToken');
+
+    saveLocalStorage('user', { email });
+    saveLocalStorage('mealsToken', 1);
+    saveLocalStorage('cocktailsToken', 1);
+    navigate('/foods');
   };
 
   return (
@@ -39,6 +53,7 @@ export default function LoginForm() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ isDisabled }
+        onClick={ handleClick }
       >
         ENTER
       </button>
