@@ -5,26 +5,36 @@ import recipesAppLetter from '../images/recipesAppLetter.svg';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import dishIcon from '../images/dishIcon.svg';
+import cupIcon from '../images/cupIcon.svg';
+import yellowProfileIcon from '../images/yellowProfileIcon.svg';
+import doneRecipesIcon from '../images/doneRecipesIcon.svg';
+import favoriteRecipesIcon from '../images/favoriteRecipesIcon.svg';
 
 export default function Header() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isSearchIconClicked, setIsSearchIconClicked] = useState(false);
   const [hasSearchButton, setHasSearchButton] = useState(true);
+  const [pageIcon, setPageIcon] = useState(dishIcon);
   const [title, setTitle] = useState('Foods');
 
-  const handlePathNames = (titlePage, search) => {
+  const handlePathNames = (titlePage, search, icon) => {
     setTitle(titlePage);
     setHasSearchButton(search);
+    setPageIcon(icon);
   };
 
   useEffect(() => {
     if (pathname !== '/foods') {
       const pathnames = {
-        '/drinks': () => { handlePathNames('Drinks', true); },
-        '/profile': () => { handlePathNames('Profile', false); },
-        '/done-recipes': () => { handlePathNames('Done Recipes', false); },
-        '/favorite-recipes': () => { handlePathNames('Favorite Recipes', false); },
+        '/drinks': () => { handlePathNames('Drinks', true, cupIcon); },
+        '/profile': () => { handlePathNames('Profile', false, yellowProfileIcon); },
+        '/done-recipes': () => {
+          handlePathNames('Done Recipes', false, doneRecipesIcon);
+        },
+        '/favorite-recipes': () => {
+          handlePathNames('Favorite Recipes', false, favoriteRecipesIcon);
+        },
       };
       pathnames[pathname]();
     }
@@ -67,7 +77,7 @@ export default function Header() {
       </section>
       <section>
         <div>
-          <img src={ dishIcon } alt="icone de prato com garfo e faca" />
+          <img src={ pageIcon } alt="icone de prato com garfo e faca" />
           <h1 data-testid="page-title">{ title }</h1>
         </div>
       </section>
