@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { RecipesContext } from '../Context/RecipesContext';
 import {
   getRecipesByFirstLetter,
   getRecipesByIngredients,
@@ -7,6 +8,7 @@ import {
 } from '../Service/requests';
 
 export default function SearchBar() {
+  const { setRecipes } = useContext(RecipesContext);
   const { pathname } = useLocation();
   const [filterSearch, setFilterSearch] = useState('');
   const [radioInput, setRadioInput] = useState();
@@ -27,8 +29,7 @@ export default function SearchBar() {
       if (result[apiUrl] === null || result.length === 0) {
         global.alert('Sorry, we haven\'t found any recipes for these filters.');
       } else {
-        console.log(result);
-        console.log('length', result.length);
+        setRecipes(result[apiUrl]);
       }
     }
   };
