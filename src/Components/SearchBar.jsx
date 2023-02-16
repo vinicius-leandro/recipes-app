@@ -12,7 +12,7 @@ export default function SearchBar() {
   const [radioInput, setRadioInput] = useState();
 
   const handleRequest = async () => {
-    const apiUrl = pathname.includes('food') ? 'food' : 'drink';
+    const apiUrl = pathname.includes('food') ? 'meals' : 'drinks';
 
     const filters = {
       ingredient: (choice, ingredient) => getRecipesByIngredients(choice, ingredient),
@@ -22,10 +22,15 @@ export default function SearchBar() {
 
     if (radioInput === 'firstLetter' && filterSearch.length !== 1) {
       global.alert('Your search must have only 1 (one) character');
+    } else {
+      const result = await filters[radioInput](apiUrl, filterSearch);
+      if (result[apiUrl] === null || result.length === 0) {
+        global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      } else {
+        console.log(result);
+        console.log('length', result.length);
+      }
     }
-
-    const result = await filters[radioInput](apiUrl, filterSearch);
-    console.log(result);
   };
 
   return (

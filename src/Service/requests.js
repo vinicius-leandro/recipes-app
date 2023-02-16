@@ -4,11 +4,11 @@ const SEARCH_URL = 'search.php?';
 const FILTER_URL = 'filter.php?';
 
 const foodOrDrink = {
-  food: axios.create({
+  meals: axios.create({
     baseURL: 'https://www.themealdb.com/api/json/v1/1/',
   }),
 
-  drink: axios.create({
+  drinks: axios.create({
     baseURL: 'https://www.thecocktaildb.com/api/json/v1/1/',
   }),
 };
