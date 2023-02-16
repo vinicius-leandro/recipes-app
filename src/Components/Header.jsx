@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import trayWithClocheAndHeart from '../images/trayWithClocheAndHeart.svg';
 import recipesAppLetter from '../images/recipesAppLetter.svg';
 import searchIcon from '../images/searchIcon.svg';
@@ -9,6 +9,7 @@ import cupIcon from '../images/cupIcon.svg';
 import yellowProfileIcon from '../images/yellowProfileIcon.svg';
 import doneRecipesIcon from '../images/doneRecipesIcon.svg';
 import favoriteRecipesIcon from '../images/favoriteRecipesIcon.svg';
+import SearchBar from './SearchBar';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -43,14 +44,12 @@ export default function Header() {
   return (
     <header>
       <section>
-        <div>
+        <Link to="/foods">
           <figure>
-            <img src={ trayWithClocheAndHeart } alt="Bandeija de restaurante e coração" />
-          </figure>
-          <figure>
+            <img src={ trayWithClocheAndHeart } alt="Bandeja de restaurante" />
             <img src={ recipesAppLetter } alt="Escrito recipes app" />
           </figure>
-        </div>
+        </Link>
         <div>
           {
             hasSearchButton && (
@@ -82,11 +81,7 @@ export default function Header() {
         </div>
       </section>
       {
-        isSearchIconClicked && (
-          <section>
-            <input type="text" data-testid="search-input" />
-          </section>
-        )
+        isSearchIconClicked && <SearchBar />
       }
     </header>
   );
