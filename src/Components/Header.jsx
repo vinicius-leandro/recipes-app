@@ -46,7 +46,7 @@ export default function Header() {
       <section>
         <Link to="/foods">
           <figure>
-            <img src={ trayWithClocheAndHeart } alt="Bandeija de restaurante" />
+            <img src={ trayWithClocheAndHeart } alt="Bandeja de restaurante" />
             <img src={ recipesAppLetter } alt="Escrito recipes app" />
           </figure>
         </Link>

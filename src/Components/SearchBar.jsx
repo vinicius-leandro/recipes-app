@@ -7,6 +7,7 @@ export default function SearchBar() {
   const handleRadioInpt = (nameInput) => {
     setRadioInput(nameInput);
   };
+
   return (
     <section>
       <form>
