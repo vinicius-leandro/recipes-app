@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
 
 describe('Testa a pagina de Login', () => {
