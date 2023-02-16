@@ -21,14 +21,15 @@ export default function Header() {
   };
 
   useEffect(() => {
-    const pathnames = {
-      '/login': () => { handlePathNames('Login', true, false); },
-      '/drinks': () => { handlePathNames('Drinks', true, true); },
-      '/profile': () => { handlePathNames('Profile', false, true); },
-      '/done-recipes': () => { handlePathNames('Done Recipes', false, true); },
-      '/favorite-recipes': () => { handlePathNames('Favorite Recipes', false, true); },
-    };
-    pathnames[pathname]();
+    if (pathname !== '/foods') {
+      const pathnames = {
+        '/drinks': () => { handlePathNames('Drinks', true, true); },
+        '/profile': () => { handlePathNames('Profile', false, true); },
+        '/done-recipes': () => { handlePathNames('Done Recipes', false, true); },
+        '/favorite-recipes': () => { handlePathNames('Favorite Recipes', false, true); },
+      };
+      pathnames[pathname]();
+    }
   }, [pathname]);
 
   return (
