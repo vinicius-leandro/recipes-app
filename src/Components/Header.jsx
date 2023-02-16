@@ -11,22 +11,20 @@ export default function Header() {
   const { pathname } = useLocation();
   const [isSearchIconClicked, setIsSearchIconClicked] = useState(false);
   const [hasSearchButton, setHasSearchButton] = useState(true);
-  const [hasProfileButton, setHasProfileButton] = useState(true);
   const [title, setTitle] = useState('Foods');
 
-  const handlePathNames = (titlePage, search, profile) => {
+  const handlePathNames = (titlePage, search) => {
     setTitle(titlePage);
     setHasSearchButton(search);
-    setHasProfileButton(profile);
   };
 
   useEffect(() => {
     if (pathname !== '/foods') {
       const pathnames = {
-        '/drinks': () => { handlePathNames('Drinks', true, true); },
-        '/profile': () => { handlePathNames('Profile', false, true); },
-        '/done-recipes': () => { handlePathNames('Done Recipes', false, true); },
-        '/favorite-recipes': () => { handlePathNames('Favorite Recipes', false, true); },
+        '/drinks': () => { handlePathNames('Drinks', true); },
+        '/profile': () => { handlePathNames('Profile', false); },
+        '/done-recipes': () => { handlePathNames('Done Recipes', false); },
+        '/favorite-recipes': () => { handlePathNames('Favorite Recipes', false); },
       };
       pathnames[pathname]();
     }
@@ -58,17 +56,13 @@ export default function Header() {
               </button>
             )
           }
-          {
-            hasProfileButton && (
-              <button type="button" onClick={ () => navigate('/profile') }>
-                <img
-                  src={ profileIcon }
-                  alt="icone de perfil"
-                  data-testid="profile-top-btn"
-                />
-              </button>
-            )
-          }
+          <button type="button" onClick={ () => navigate('/profile') }>
+            <img
+              src={ profileIcon }
+              alt="icone de perfil"
+              data-testid="profile-top-btn"
+            />
+          </button>
         </div>
       </section>
       <section>
