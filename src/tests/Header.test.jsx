@@ -14,7 +14,7 @@ describe('Testa o component Header', () => {
     );
 
     const trayWithClocheAndHeart = screen.getByRole('img', {
-      name: /bandeija de restaurante e coração/i,
+      name: /bandeja de restaurante/i,
     });
     const recipesAppLetter = screen.getByRole('img', { name: /escrito recipes app/i });
     const searchButton = screen.getByRole('img', { name: /icone de lupa/i });
@@ -36,7 +36,7 @@ describe('Testa o component Header', () => {
     );
 
     const trayWithClocheAndHeart = screen.getByRole('img', {
-      name: /bandeija de restaurante e coração/i,
+      name: /bandeja de restaurante/i,
     });
     const recipesAppLetter = screen.getByRole('img', { name: /escrito recipes app/i });
     const searchButton = screen.getByRole('img', { name: /icone de lupa/i });
@@ -58,7 +58,7 @@ describe('Testa o component Header', () => {
     );
 
     const trayWithClocheAndHeart = screen.getByRole('img', {
-      name: /bandeija de restaurante e coração/i,
+      name: /bandeja de restaurante/i,
     });
     const recipesAppLetter = screen.getByRole('img', { name: /escrito recipes app/i });
     const searchButton = screen.queryByRole('img', { name: /icone de lupa/i });
@@ -80,7 +80,7 @@ describe('Testa o component Header', () => {
     );
 
     const trayWithClocheAndHeart = screen.getByRole('img', {
-      name: /bandeija de restaurante e coração/i,
+      name: /bandeja de restaurante/i,
     });
     const recipesAppLetter = screen.getByRole('img', { name: /escrito recipes app/i });
     const searchButton = screen.queryByRole('img', { name: /icone de lupa/i });
@@ -102,7 +102,7 @@ describe('Testa o component Header', () => {
     );
 
     const trayWithClocheAndHeart = screen.getByRole('img', {
-      name: /bandeija de restaurante e coração/i,
+      name: /bandeja de restaurante/i,
     });
     const recipesAppLetter = screen.getByRole('img', { name: /escrito recipes app/i });
     const searchButton = screen.queryByRole('img', { name: /icone de lupa/i });
