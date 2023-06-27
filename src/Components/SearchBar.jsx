@@ -11,7 +11,7 @@ export default function SearchBar() {
   const { setRecipes } = useContext(RecipesContext);
   const { pathname } = useLocation();
   const [filterSearch, setFilterSearch] = useState('');
-  const [radioInput, setRadioInput] = useState();
+  const [radioInput, setRadioInput] = useState('ingredient');
 
   const handleRequest = async () => {
     const apiUrl = pathname.includes('food') ? 'meals' : 'drinks';
@@ -52,6 +52,7 @@ export default function SearchBar() {
               id="ingredientRadioInput"
               value="ingredient"
               data-testid="ingredient-search-radio"
+              defaultChecked
               onClick={ ({ target: { value } }) => setRadioInput(value) }
             />
             Ingredient
