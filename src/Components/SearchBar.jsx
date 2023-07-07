@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { RecipesContext } from '../Context/RecipesContext';
 import {
   getRecipesByFirstLetter,
@@ -8,10 +8,21 @@ import {
 } from '../Service/requests';
 
 export default function SearchBar() {
+  const navigate = useNavigate();
   const { setRecipes } = useContext(RecipesContext);
   const { pathname } = useLocation();
   const [filterSearch, setFilterSearch] = useState('');
   const [radioInput, setRadioInput] = useState('ingredient');
+
+  const handleOnlyOneResult = (result, url) => {
+    if (result.length === 1 && url === 'meals') {
+      const [meal] = result;
+      navigate(`/foods/${meal.idMeal}`);
+    } else if (result.length === 1 && url === 'drinks') {
+      const [drink] = result;
+      navigate(`/foods${drink.idDrink}`);
+    }
+  };
 
   const handleRequest = async () => {
     const apiUrl = pathname.includes('food') ? 'meals' : 'drinks';
@@ -28,9 +39,9 @@ export default function SearchBar() {
       const result = await filters[radioInput](apiUrl, filterSearch);
       if (result[apiUrl] === null || result.length === 0) {
         global.alert('Sorry, we haven\'t found any recipes for these filters.');
-      } else {
-        setRecipes(result[apiUrl]);
       }
+      handleOnlyOneResult(result[apiUrl], apiUrl);
+      setRecipes(result[apiUrl]);
     }
   };
 
