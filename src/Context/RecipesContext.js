@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const RecipesContext = createContext([]);
 
 export function RecipesProvider({ children }) {
-  const [recipes, setRecipes] = useState({});
+  const [recipes, setRecipes] = useState([]);
   const value = useMemo(
     () => ({
       recipes,
