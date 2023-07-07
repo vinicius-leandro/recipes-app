@@ -133,7 +133,7 @@ describe('Testa o component Header', () => {
     expect(textInput).not.toBeInTheDocument();
   });
 
-  test('Se ao clicar no botão de search o input aparece', () => {
+  test('Se ao clicar no botão de icone é redirecionado ao perfil', () => {
     render(
       <MemoryRouter initialEntries={ ['/foods'] }>
         <App />
