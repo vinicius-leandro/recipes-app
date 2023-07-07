@@ -20,7 +20,7 @@ export default function SearchBar() {
       navigate(`/foods/${meal.idMeal}`);
     } else if (result.length === 1 && url === 'drinks') {
       const [drink] = result;
-      navigate(`/foods${drink.idDrink}`);
+      navigate(`/drinks/${drink.idDrink}`);
     }
   };
 
