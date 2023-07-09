@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Header from '../Components/Header';
 import { RecipesContext } from '../Context/RecipesContext';
 import RecipesCard from '../Components/RecipesCard';
+import Footer from '../Components/Footer';
 
 export default function Recipes() {
   const { recipes } = useContext(RecipesContext);
@@ -10,12 +11,9 @@ export default function Recipes() {
   const recipeImage = pathname.includes('food') ? 'strMealThumb' : 'strDrinkThumb';
   const recipeName = pathname.includes('food') ? 'strMeal' : 'strDrink';
   const LIMIT = 12;
-  console.log(recipes);
   return (
     <>
-      <section>
-        <Header />
-      </section>
+      <Header />
       {
         recipes.length !== 0 && (
           <section>
@@ -32,6 +30,7 @@ export default function Recipes() {
           </section>
         )
       }
+      <Footer />
     </>
   );
 }
