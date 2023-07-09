@@ -12,6 +12,8 @@ export default function Recipes() {
   const { pathname } = useLocation();
   const recipeImage = pathname.includes('food') ? 'strMealThumb' : 'strDrinkThumb';
   const recipeName = pathname.includes('food') ? 'strMeal' : 'strDrink';
+  const recipeId = pathname.includes('food') ? 'idMeal' : 'idDrink';
+  const foodOrDrink = pathname.includes('food') ? 'foods' : 'drinks';
   const recipesOnDisplay = !hasFilter ? recipes : filteredRecipes;
   const LIMIT = 12;
 
@@ -38,9 +40,10 @@ export default function Recipes() {
           recipesOnDisplay.slice(0, LIMIT).map((recipe, index) => (
             <RecipesCard
               key={ index }
-              index={ index }
+              foodOrDrink={ foodOrDrink }
               recipeImage={ recipe[recipeImage] }
               recipeName={ recipe[recipeName] }
+              recipeId={ recipe[recipeId] }
             />
           ))
         }
