@@ -32,3 +32,8 @@ export const getGenericRecipes = async (choice) => {
   const { data } = await foodOrDrink[choice].get(`${SEARCH_URL}s=`);
   return data[choice];
 };
+
+export const getFilteredRecipes = async (choice, filter) => {
+  const { data } = await foodOrDrink[choice].get(`${FILTER_URL}c=${filter}`);
+  return data[choice];
+};
