@@ -27,3 +27,8 @@ export const getRecipesByFirstLetter = async (choice, firstLetter) => {
   const { data } = await foodOrDrink[choice].get(`${SEARCH_URL}f=${firstLetter}`);
   return data;
 };
+
+export const getGenericRecipes = async (choice) => {
+  const { data } = await foodOrDrink[choice].get(`${SEARCH_URL}s=`);
+  return data[choice];
+};
