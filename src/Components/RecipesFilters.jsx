@@ -69,7 +69,8 @@ export default function RecipesFilters() {
         sixthButton: { name: 'Cocoa', img: cocoaIcon, alt: 'Imagem de xicará de café' },
       });
     }
-  }, [pathname]);
+    setHasFilter(false);
+  }, [pathname, setHasFilter]);
   return (
     <section>
       <section>
