@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useMatches } from 'react-router-dom';
 import { getRecipeById } from '../Service/requests';
 import ControlledCarousel from '../Components/ControlledCarousel';
+import RecipesDetailsButton from '../Components/RecipesDetailsButton';
 
 export default function RecipesDetails() {
   const match = useMatches();
@@ -10,6 +11,7 @@ export default function RecipesDetails() {
   const [showVideo, setShowVideo] = useState(false);
   const image = match[1].pathname.includes('food') ? 'strMealThumb' : 'strDrinkThumb';
   const name = match[1].pathname.includes('food') ? 'strMeal' : 'strDrink';
+  const mealsOrCocktails = match[1].pathname.includes('food') ? 'meals' : 'cocktails';
   const INITIAL_CODE_VIDEO = 33;
   useEffect(() => {
     const getRecipe = async () => {
@@ -90,6 +92,10 @@ export default function RecipesDetails() {
         </div>
       </section>
       <ControlledCarousel />
+      <RecipesDetailsButton
+        id={ match[1].params.id }
+        mealsOrCocktails={ mealsOrCocktails }
+      />
     </section>
   );
 }
