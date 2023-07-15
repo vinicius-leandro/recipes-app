@@ -25,7 +25,8 @@ export default function LoginForm() {
   const handleClick = () => {
     const { email } = loginFormData;
 
-    checkLocalStorage('user', 'mealsToken', 'cocktailsToken');
+    checkLocalStorage('user', 'mealsToken', 'cocktailsToken',
+      'doneRecipes', 'favoriteRecipes');
 
     saveLocalStorage('user', { email });
     saveLocalStorage('mealsToken', 1);

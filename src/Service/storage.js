@@ -1,7 +1,8 @@
-const checkLocalStorage = (...objectsToCheck) => {
-  objectsToCheck.forEach((object) => {
-    if (!JSON.parse(localStorage.getItem(object))) {
-      localStorage.setItem(object, JSON.stringify({}));
+const checkLocalStorage = (...keysToCheck) => {
+  keysToCheck.forEach((key) => {
+    const arrayOrObject = key === 'doneRecipes' || key === 'favoriteRecipes' ? [] : {};
+    if (!JSON.parse(localStorage.getItem(key))) {
+      localStorage.setItem(key, JSON.stringify(arrayOrObject));
     }
   });
 };
