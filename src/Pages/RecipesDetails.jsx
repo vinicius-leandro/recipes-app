@@ -3,16 +3,30 @@ import { useMatches } from 'react-router-dom';
 import { getRecipeById } from '../Service/requests';
 import ControlledCarousel from '../Components/ControlledCarousel';
 import RecipesDetailsButton from '../Components/RecipesDetailsButton';
+import ShareAndFavorite from '../Components/ShareAndFavorite';
 
 export default function RecipesDetails() {
   const match = useMatches();
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [showVideo, setShowVideo] = useState(false);
-  const image = match[1].pathname.includes('food') ? 'strMealThumb' : 'strDrinkThumb';
-  const name = match[1].pathname.includes('food') ? 'strMeal' : 'strDrink';
-  const mealsOrCocktails = match[1].pathname.includes('food') ? 'meals' : 'cocktails';
+  const foodOrDrink = match[1].pathname.includes('food') ? {
+    id: 'idMeal',
+    type: 'food',
+    name: 'strMeal',
+    image: 'strMealThumb',
+    mealsOrCocktails: 'meals',
+    alcoholicOrNot: false,
+  } : {
+    id: 'idDrink',
+    type: 'drink',
+    name: 'strDrink',
+    image: 'strDrinkThumb',
+    mealsOrCocktails: 'cocktails',
+    alcoholicOrNot: true,
+  };
   const INITIAL_CODE_VIDEO = 33;
+  const { id, type, name, image, mealsOrCocktails, alcoholicOrNot } = foodOrDrink;
   useEffect(() => {
     const getRecipe = async () => {
       if (match[1].pathname.includes('foods')) {
@@ -29,7 +43,6 @@ export default function RecipesDetails() {
 
     getRecipe();
   }, [match]);
-
   useEffect(() => {
     const getIngredients = (obj) => {
       const ingredientArray = [];
@@ -52,6 +65,18 @@ export default function RecipesDetails() {
     <section>
       <h1>{recipe[name]}</h1>
       <p>{recipe.strCategory}</p>
+      <ShareAndFavorite
+        pathname={ match[1].pathname }
+        recipe={ {
+          id: recipe[id],
+          type,
+          nationality: recipe.strArea,
+          category: recipe.strCategory,
+          alcoholicOrNot: recipe[alcoholicOrNot],
+          name: recipe[name],
+          image: recipe[image],
+        } }
+      />
       <figure>
         <img src={ recipe[image] } alt="" />
       </figure>

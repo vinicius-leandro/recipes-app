@@ -24,9 +24,15 @@ const saveLocalStorage = (objectToSave, payload) => {
 
 const getLocalStorage = (objectToGet) => JSON.parse(localStorage.getItem(objectToGet));
 
+const removeLocalStorage = (objectToRemove, id) => {
+  const localStorageItem = getLocalStorage(objectToRemove);
+  saveLocalStorage(objectToRemove, localStorageItem.filter((item) => item.id !== id));
+};
+
 export {
   checkLocalStorage,
   saveLocalStorage,
   getLocalStorage,
   checkInProgressRecipes,
+  removeLocalStorage,
 };
