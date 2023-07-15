@@ -1,17 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-export default function RecipesCard({ index, recipeImage, recipeName }) {
+export default function RecipesCard({ foodOrDrink, recipeImage, recipeName, recipeId }) {
   return (
-    <section data-testid={ `${index}-recipe-card` }>
-      <img src={ recipeImage } alt={ recipeName } data-testid={ `${index}-card-img` } />
-      <p data-testid={ `${index}-card-name` }>{ recipeName }</p>
-    </section>
+    <Link to={ `/${foodOrDrink}/${recipeId}` }>
+      <section>
+        <img src={ recipeImage } alt={ recipeName } />
+        <p>{ recipeName }</p>
+      </section>
+    </Link>
+
   );
 }
 
 RecipesCard.propTypes = {
   index: PropTypes.number,
+  foodOrDrink: PropTypes.string,
   recipeImage: PropTypes.string,
   recipeName: PropTypes.string,
+  recipeId: PropTypes.string,
 }.isRequired;

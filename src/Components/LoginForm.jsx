@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkLocalStorage, saveLocalStorage } from '../Service/storage';
+import { checkInProgressRecipes,
+  checkLocalStorage, saveLocalStorage } from '../Service/storage';
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -25,8 +26,10 @@ export default function LoginForm() {
   const handleClick = () => {
     const { email } = loginFormData;
 
-    checkLocalStorage('user', 'mealsToken', 'cocktailsToken');
+    checkLocalStorage('user', 'mealsToken', 'cocktailsToken',
+      'doneRecipes', 'favoriteRecipes');
 
+    checkInProgressRecipes();
     saveLocalStorage('user', { email });
     saveLocalStorage('mealsToken', 1);
     saveLocalStorage('cocktailsToken', 1);

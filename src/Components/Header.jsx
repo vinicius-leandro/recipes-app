@@ -15,9 +15,9 @@ export default function Header() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isSearchIconClicked, setIsSearchIconClicked] = useState(false);
-  const [hasSearchButton, setHasSearchButton] = useState(true);
-  const [pageIcon, setPageIcon] = useState(dishIcon);
-  const [title, setTitle] = useState('Foods');
+  const [hasSearchButton, setHasSearchButton] = useState();
+  const [pageIcon, setPageIcon] = useState();
+  const [title, setTitle] = useState();
 
   const handlePathNames = (titlePage, search, icon) => {
     setTitle(titlePage);
@@ -38,6 +38,8 @@ export default function Header() {
         },
       };
       pathnames[pathname]();
+    } else {
+      handlePathNames('Foods', true, dishIcon);
     }
   }, [pathname]);
 
