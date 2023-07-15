@@ -37,7 +37,7 @@ export default function RecipesDetails() {
       } else {
         const [result] = await getRecipeById('drinks', match[1].params.id);
         setRecipe(result);
-        setShowVideo(true);
+        setShowVideo(false);
       }
     };
 
@@ -49,7 +49,8 @@ export default function RecipesDetails() {
       const MAX_INGREDIENTS = 15;
       for (let index = 1; index <= MAX_INGREDIENTS; index += 1) {
         if (obj[`strIngredient${index}`] !== ''
-        && obj[`strIngredient${index}`] !== undefined) {
+        && obj[`strIngredient${index}`] !== undefined
+        && obj[`strIngredient${index}`] !== null) {
           ingredientArray.push(
             `${obj[`strIngredient${index}`]} - ${obj[`strMeasure${index}`]}`,
           );
@@ -100,9 +101,9 @@ export default function RecipesDetails() {
       </section>
       <section>
         <h2>Video</h2>
-        <div>
-          {
-            showVideo && (
+        {
+          showVideo && (
+            <div>
               <iframe
                 width="560"
                 height="315"
@@ -112,9 +113,9 @@ export default function RecipesDetails() {
                 title="YouTube video player"
                 allowFullScreen
               />
-            )
-          }
-        </div>
+            </div>
+          )
+        }
       </section>
       <ControlledCarousel />
       <RecipesDetailsButton
