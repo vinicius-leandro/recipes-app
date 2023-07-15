@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMatches } from 'react-router-dom';
 import { getRecipeById } from '../Service/requests';
+import ControlledCarousel from '../Components/ControlledCarousel';
 
 export default function RecipesDetails() {
   const match = useMatches();
@@ -88,6 +89,7 @@ export default function RecipesDetails() {
           }
         </div>
       </section>
+      <ControlledCarousel />
     </section>
   );
 }
