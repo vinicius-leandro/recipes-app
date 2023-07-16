@@ -46,11 +46,16 @@ const saveOrRemoveInProgress = async (value, obj) => {
   saveLocalStorage('inProgressRecipes', currentInProgress);
 };
 
+const removeAllLocalStorage = () => {
+  localStorage.clear();
+};
+
 export {
   checkLocalStorage,
   saveLocalStorage,
   getLocalStorage,
-  checkInProgressRecipes,
   removeLocalStorage,
+  removeAllLocalStorage,
+  checkInProgressRecipes,
   saveOrRemoveInProgress,
 };
