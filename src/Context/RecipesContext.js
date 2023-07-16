@@ -7,16 +7,19 @@ export function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [hasFilter, setHasFilter] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const value = useMemo(
     () => ({
       recipes,
       filteredRecipes,
       hasFilter,
+      buttonDisabled,
       setRecipes,
-      setFilteredRecipes,
       setHasFilter,
+      setFilteredRecipes,
+      setButtonDisabled,
     }),
-    [filteredRecipes, recipes, hasFilter],
+    [filteredRecipes, recipes, hasFilter, buttonDisabled],
   );
 
   return (
