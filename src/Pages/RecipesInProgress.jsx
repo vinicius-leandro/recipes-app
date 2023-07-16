@@ -54,8 +54,6 @@ export default function RecipesInProgress() {
     getRecipe();
   }, [match]);
 
-  console.log(recipe);
-
   const handleClick = () => {
     const payload = {
       id: recipe[id],

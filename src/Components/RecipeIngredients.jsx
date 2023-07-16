@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { getLocalStorage, saveLocalStorage } from '../Service/storage';
+import {
+  getLocalStorage, saveLocalStorage, saveOrRemoveInProgress,
+} from '../Service/storage';
 import { RecipesContext } from '../Context/RecipesContext';
+import getIngredients from '../Service/utils';
 
 export default function RecipeIngredients({ recipe, pathname, id }) {
   const { setButtonDisabled } = useContext(RecipesContext);
@@ -12,6 +15,9 @@ export default function RecipeIngredients({ recipe, pathname, id }) {
     ? 'details' : IN_PROGRESS;
 
   const mealsOrCocktails = pathname.includes('food') ? 'meals' : 'cocktails';
+  const obj = {
+    mealsOrCocktails, id, setCheckedIngredients,
+  };
 
   useEffect(() => {
     if (pathname.includes(IN_PROGRESS)) {
@@ -25,23 +31,8 @@ export default function RecipeIngredients({ recipe, pathname, id }) {
   }, [id, mealsOrCocktails, pathname]);
 
   useEffect(() => {
-    const getIngredients = () => {
-      const ingredientArray = [];
-      const MAX_INGREDIENTS = 15;
-      for (let index = 1; index <= MAX_INGREDIENTS; index += 1) {
-        if (recipe[`strIngredient${index}`] !== ''
-        && recipe[`strIngredient${index}`] !== undefined
-        && recipe[`strIngredient${index}`] !== null) {
-          ingredientArray.push(
-            `${recipe[`strIngredient${index}`]} - ${recipe[`strMeasure${index}`]}`,
-          );
-        }
-      }
-
-      setIngredients(ingredientArray);
-    };
-
-    getIngredients();
+    const ingredientArray = getIngredients(recipe);
+    setIngredients(ingredientArray);
   }, [recipe]);
 
   useEffect(() => {
@@ -49,22 +40,6 @@ export default function RecipeIngredients({ recipe, pathname, id }) {
       && ingredients.length === checkedIngredients.length) setButtonDisabled(false);
     else setButtonDisabled(true);
   }, [checkedIngredients, ingredients, setButtonDisabled]);
-
-  const handleChange = async (value) => {
-    const currentInProgress = await getLocalStorage('inProgressRecipes');
-    if (currentInProgress[mealsOrCocktails][id].includes(value)) {
-      currentInProgress[mealsOrCocktails][id].forEach((ingredient, index) => {
-        if (ingredient === value) {
-          currentInProgress[mealsOrCocktails][id].splice(index, 1);
-          setCheckedIngredients(currentInProgress[mealsOrCocktails][id]);
-        }
-      });
-    } else {
-      currentInProgress[mealsOrCocktails][id].push(value);
-      setCheckedIngredients(currentInProgress[mealsOrCocktails][id]);
-    }
-    saveLocalStorage('inProgressRecipes', currentInProgress);
-  };
 
   return (
     <section>
@@ -92,7 +67,9 @@ export default function RecipeIngredients({ recipe, pathname, id }) {
                       id={ ingredient }
                       value={ ingredient }
                       checked={ checkedIngredients.some((i) => ingredient === i) }
-                      onChange={ ({ target: { value } }) => handleChange(value) }
+                      onChange={
+                        ({ target: { value } }) => saveOrRemoveInProgress(value, obj)
+                      }
                     />
                     {ingredient}
                   </label>
