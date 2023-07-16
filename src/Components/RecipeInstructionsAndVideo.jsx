@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function RecipeInstructionsAndVideo({ instructions, ytUrl, showVideo }) {
+export default function RecipeInstructionsAndVideo({ instructions, ytUrl }) {
   const INITIAL_CODE_VIDEO = 33;
 
   return (
@@ -14,21 +14,18 @@ export default function RecipeInstructionsAndVideo({ instructions, ytUrl, showVi
       </section>
       <section>
         <h2>Video</h2>
-        {
-          showVideo && (
-            <div>
-              <iframe
-                width="560"
-                height="315"
-                src={
-                  `https://www.youtube-nocookie.com/embed/${JSON.stringify(ytUrl).slice(INITIAL_CODE_VIDEO, ytUrl.lastIndexOf(' '))}`
-                }
-                title="YouTube video player"
-                allowFullScreen
-              />
-            </div>
-          )
-        }
+        <div>
+          <iframe
+            width="560"
+            height="315"
+            src={
+              `https://www.youtube-nocookie.com/embed/${JSON.stringify(ytUrl).slice(INITIAL_CODE_VIDEO, ytUrl.lastIndexOf(' '))}`
+            }
+            title="YouTube video player"
+            allowFullScreen
+          />
+        </div>
+
       </section>
     </>
   );
@@ -37,5 +34,4 @@ export default function RecipeInstructionsAndVideo({ instructions, ytUrl, showVi
 RecipeInstructionsAndVideo.propTypes = {
   instructions: PropTypes.string,
   ytUrl: PropTypes.string,
-  showVideo: PropTypes.bool,
 }.isRequired;

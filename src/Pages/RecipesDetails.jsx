@@ -10,7 +10,7 @@ import RecipeHeader from '../Components/RecipeHeader';
 export default function RecipesDetails() {
   const match = useMatches();
   const [recipe, setRecipe] = useState({});
-  const [showVideo, setShowVideo] = useState(false);
+  const [showYtAndInstructions, setShowYtAndInstructions] = useState(false);
   const mealsOrCocktails = match[1].pathname.includes('food') ? 'meals' : 'cocktails';
 
   useEffect(() => {
@@ -19,11 +19,11 @@ export default function RecipesDetails() {
         const [result] = await getRecipeById('meals', match[1].params.id);
         JSON.stringify(result.strYoutube);
         setRecipe(result);
-        setShowVideo(true);
+        setShowYtAndInstructions(true);
       } else {
         const [result] = await getRecipeById('drinks', match[1].params.id);
         setRecipe(result);
-        setShowVideo(false);
+        setShowYtAndInstructions(false);
       }
     };
 
@@ -32,12 +32,15 @@ export default function RecipesDetails() {
   return (
     <section>
       <RecipeHeader recipe={ recipe } pathname={ match[1].pathname } />
-      <RecipeIngredients recipe={ recipe } />
-      <RecipeInstructionsAndVideo
-        instructions={ recipe.strInstrucions }
-        ytUrl={ recipe.strYoutube }
-        showVideo={ showVideo }
-      />
+      <RecipeIngredients recipe={ recipe } pathname={ match[1].pathname } />
+      {
+        showYtAndInstructions && (
+          <RecipeInstructionsAndVideo
+            instructions={ recipe.strInstrucions }
+            ytUrl={ recipe.strYoutube }
+          />
+        )
+      }
       <ControlledCarousel />
       <RecipesDetailsButton
         id={ match[1].params.id }
