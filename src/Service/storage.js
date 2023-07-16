@@ -29,10 +29,28 @@ const removeLocalStorage = (objectToRemove, id) => {
   saveLocalStorage(objectToRemove, localStorageItem.filter((item) => item.id !== id));
 };
 
+const saveOrRemoveInProgress = async (value, obj) => {
+  const { mealsOrCocktails, id, setCheckedIngredients } = obj;
+  const currentInProgress = await getLocalStorage('inProgressRecipes');
+  if (currentInProgress[mealsOrCocktails][id].includes(value)) {
+    currentInProgress[mealsOrCocktails][id].forEach((ingredient, index) => {
+      if (ingredient === value) {
+        currentInProgress[mealsOrCocktails][id].splice(index, 1);
+        setCheckedIngredients(currentInProgress[mealsOrCocktails][id]);
+      }
+    });
+  } else {
+    currentInProgress[mealsOrCocktails][id].push(value);
+    setCheckedIngredients(currentInProgress[mealsOrCocktails][id]);
+  }
+  saveLocalStorage('inProgressRecipes', currentInProgress);
+};
+
 export {
   checkLocalStorage,
   saveLocalStorage,
   getLocalStorage,
   checkInProgressRecipes,
   removeLocalStorage,
+  saveOrRemoveInProgress,
 };
