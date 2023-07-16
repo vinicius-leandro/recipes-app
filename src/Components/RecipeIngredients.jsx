@@ -8,6 +8,21 @@ export default function RecipeIngredients({ recipe, pathname, id }) {
   const [ingredients, setIngredients] = useState([]);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const IN_PROGRESS = 'in-progress';
+  const detailsOrInProgress = !pathname.includes(IN_PROGRESS)
+    ? 'details' : IN_PROGRESS;
+
+  const mealsOrCocktails = pathname.includes('food') ? 'meals' : 'cocktails';
+
+  useEffect(() => {
+    if (pathname.includes(IN_PROGRESS)) {
+      const inProgress = getLocalStorage('inProgressRecipes');
+      if (!inProgress[mealsOrCocktails][id]) {
+        inProgress[mealsOrCocktails] = { [id]: [] };
+        saveLocalStorage('inProgressRecipes', inProgress);
+      }
+      setCheckedIngredients(inProgress[mealsOrCocktails][id]);
+    }
+  }, [id, mealsOrCocktails, pathname]);
 
   useEffect(() => {
     const getIngredients = () => {
@@ -35,37 +50,21 @@ export default function RecipeIngredients({ recipe, pathname, id }) {
     else setButtonDisabled(true);
   }, [checkedIngredients, ingredients, setButtonDisabled]);
 
-  const handleChange = async (value) => {
-    const currentInProgress = await getLocalStorage('inProgressRecipes');
-    if (currentInProgress[mealsOrCocktails][id].includes(value)) {
-      currentInProgress[mealsOrCocktails][id].forEach((ingredient, index) => {
-        if (ingredient === value) {
-          currentInProgress[mealsOrCocktails][id].splice(index, 1);
-          setCheckedIngredients(currentInProgress[mealsOrCocktails][id]);
-        }
-      });
-    } else {
-      currentInProgress[mealsOrCocktails][id].push(value);
-      setCheckedIngredients(currentInProgress[mealsOrCocktails][id]);
-    }
-    saveLocalStorage('inProgressRecipes', currentInProgress);
-  };
-
-  const detailsOrInProgress = !pathname.includes(IN_PROGRESS)
-    ? 'details' : IN_PROGRESS;
-
-  const mealsOrCocktails = pathname.includes('food') ? 'meals' : 'cocktails';
-
-  useEffect(() => {
-    if (pathname.includes(IN_PROGRESS)) {
-      const inProgress = getLocalStorage('inProgressRecipes');
-      if (!inProgress[mealsOrCocktails][id]) {
-        inProgress[mealsOrCocktails] = { [id]: [] };
-        saveLocalStorage('inProgressRecipes', inProgress);
-      }
-      setCheckedIngredients(inProgress[mealsOrCocktails][id]);
-    }
-  }, [id, mealsOrCocktails, pathname]);
+  // const handleChange = async (value) => {
+  //   const currentInProgress = await getLocalStorage('inProgressRecipes');
+  //   if (currentInProgress[mealsOrCocktails][id].includes(value)) {
+  //     currentInProgress[mealsOrCocktails][id].forEach((ingredient, index) => {
+  //       if (ingredient === value) {
+  //         currentInProgress[mealsOrCocktails][id].splice(index, 1);
+  //         setCheckedIngredients(currentInProgress[mealsOrCocktails][id]);
+  //       }
+  //     });
+  //   } else {
+  //     currentInProgress[mealsOrCocktails][id].push(value);
+  //     setCheckedIngredients(currentInProgress[mealsOrCocktails][id]);
+  //   }
+  //   saveLocalStorage('inProgressRecipes', currentInProgress);
+  // };
 
   return (
     <section>
