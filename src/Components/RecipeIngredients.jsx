@@ -8,21 +8,6 @@ export default function RecipeIngredients({ recipe, pathname, id }) {
   const [ingredients, setIngredients] = useState([]);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const IN_PROGRESS = 'in-progress';
-  const detailsOrInProgress = !pathname.includes(IN_PROGRESS)
-    ? 'details' : IN_PROGRESS;
-
-  const mealsOrCocktails = pathname.includes('food') ? 'meals' : 'cocktails';
-
-  useEffect(() => {
-    if (pathname.includes(IN_PROGRESS)) {
-      const inProgress = getLocalStorage('inProgressRecipes');
-      if (!inProgress[mealsOrCocktails][id]) {
-        inProgress[mealsOrCocktails] = { [id]: [] };
-        saveLocalStorage('inProgressRecipes', inProgress);
-      }
-      setCheckedIngredients(inProgress[mealsOrCocktails][id]);
-    }
-  }, [id, mealsOrCocktails, pathname]);
 
   useEffect(() => {
     const getIngredients = () => {
@@ -65,6 +50,22 @@ export default function RecipeIngredients({ recipe, pathname, id }) {
     }
     saveLocalStorage('inProgressRecipes', currentInProgress);
   };
+
+  const detailsOrInProgress = !pathname.includes(IN_PROGRESS)
+    ? 'details' : IN_PROGRESS;
+
+  const mealsOrCocktails = pathname.includes('food') ? 'meals' : 'cocktails';
+
+  useEffect(() => {
+    if (pathname.includes(IN_PROGRESS)) {
+      const inProgress = getLocalStorage('inProgressRecipes');
+      if (!inProgress[mealsOrCocktails][id]) {
+        inProgress[mealsOrCocktails] = { [id]: [] };
+        saveLocalStorage('inProgressRecipes', inProgress);
+      }
+      setCheckedIngredients(inProgress[mealsOrCocktails][id]);
+    }
+  }, [id, mealsOrCocktails, pathname]);
 
   return (
     <section>
