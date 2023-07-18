@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import { propTypes } from 'react-bootstrap/esm/Image';
+import { RecipesContext } from '../Context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import emptyHeartIcon from '../images/emptyHeartIcon.svg';
 import fullHeartIcon from '../images/fullHeartIcon.svg';
@@ -9,8 +10,8 @@ import { getLocalStorage, removeLocalStorage,
   saveLocalStorage } from '../Service/storage';
 
 function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
+  const { isFavorite, setIsFavorite } = useContext(RecipesContext);
   const [shareButtonClicked, setShareButtonClicked] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
   const favoriteButtonIcon = !isFavorite ? emptyHeartIcon : fullHeartIcon;
 
   useEffect(() => {
@@ -19,7 +20,7 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
     favoriteRecipes.forEach((favoriteRecipe) => {
       if (favoriteRecipe.id === id) setIsFavorite(true);
     });
-  }, [recipe]);
+  }, [recipe, setIsFavorite]);
 
   const handleShareButton = () => {
     const TWO_SECONDS = 2000;

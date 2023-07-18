@@ -5,7 +5,7 @@ import { RecipesContext } from '../Context/RecipesContext';
 
 export default function DoneAndFavoriteFilters() {
   const { pathname } = useLocation();
-  const { setRecipes } = useContext(RecipesContext);
+  const { setRecipes, isFavorite } = useContext(RecipesContext);
   const [originalRecipes, setOriginalRecipes] = useState([]);
   const [doneOrFavorite, setDoneOrFavorite] = useState('');
 
@@ -15,7 +15,7 @@ export default function DoneAndFavoriteFilters() {
     setRecipes(doneOrFavoriteRecipes);
     setDoneOrFavorite(path);
     setOriginalRecipes(doneOrFavoriteRecipes);
-  }, [pathname, setRecipes]);
+  }, [pathname, setRecipes, isFavorite]);
 
   const handleFilters = (type) => {
     const foodorDrinkRecipes = originalRecipes.filter((recipe) => recipe.type === type);
