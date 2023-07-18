@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import { getLocalStorage, removeAllLocalStorage } from '../Service/storage';
+import doneProfileIcon from '../images/doneProfileIcon.svg';
+import favoriteProfileIcon from '../images/favoriteProfileIcon.svg';
+import logoutProfileIcon from '../images/LogoutProfileIcon.svg';
+import { checkAuthentication } from '../Service/utils';
 
 export default function Profile() {
   const [email, setEmail] = useState('');
@@ -17,6 +21,11 @@ export default function Profile() {
     removeAllLocalStorage();
     navigate('/login');
   };
+
+  useEffect(() => {
+    checkAuthentication(navigate);
+  }, [navigate]);
+
   return (
     <section>
       <Header />
@@ -29,7 +38,7 @@ export default function Profile() {
             type="button"
             onClick={ () => navigate('/done-recipes') }
           >
-            Done Recipes
+            <img src={ doneProfileIcon } alt="botão done" />
 
           </button>
         </section>
@@ -38,7 +47,7 @@ export default function Profile() {
             type="button"
             onClick={ () => navigate('/favorite-recipes') }
           >
-            Favorite Recipes
+            <img src={ favoriteProfileIcon } alt="botão favorite" />
 
           </button>
         </section>
@@ -47,7 +56,7 @@ export default function Profile() {
             type="button"
             onClick={ handleLogout }
           >
-            Logout
+            <img src={ logoutProfileIcon } alt="botão logout" />
 
           </button>
         </section>

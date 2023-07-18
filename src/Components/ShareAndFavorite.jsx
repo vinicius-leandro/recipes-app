@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
+import { propTypes } from 'react-bootstrap/esm/Image';
+import { RecipesContext } from '../Context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import emptyHeartIcon from '../images/emptyHeartIcon.svg';
 import fullHeartIcon from '../images/fullHeartIcon.svg';
 import { getLocalStorage, removeLocalStorage,
   saveLocalStorage } from '../Service/storage';
 
-export default function ShareAndFavorite({ pathname, recipe }) {
+function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
+  const { isFavorite, setIsFavorite } = useContext(RecipesContext);
   const [shareButtonClicked, setShareButtonClicked] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
   const favoriteButtonIcon = !isFavorite ? emptyHeartIcon : fullHeartIcon;
 
   useEffect(() => {
@@ -18,7 +20,7 @@ export default function ShareAndFavorite({ pathname, recipe }) {
     favoriteRecipes.forEach((favoriteRecipe) => {
       if (favoriteRecipe.id === id) setIsFavorite(true);
     });
-  }, [recipe]);
+  }, [recipe, setIsFavorite]);
 
   const handleShareButton = () => {
     const TWO_SECONDS = 2000;
@@ -46,9 +48,13 @@ export default function ShareAndFavorite({ pathname, recipe }) {
         <button type="button" onClick={ handleShareButton }>
           <img src={ shareIcon } alt="botão de compartilhar" />
         </button>
-        <button type="button" onClick={ handleFavoriteButton }>
-          <img src={ favoriteButtonIcon } alt="coração de favoritar" />
-        </button>
+        {
+          showFavoriteButton && (
+            <button type="button" onClick={ handleFavoriteButton }>
+              <img src={ favoriteButtonIcon } alt="coração de favoritar" />
+            </button>
+          )
+        }
       </section>
       {
         shareButtonClicked && (
@@ -60,6 +66,7 @@ export default function ShareAndFavorite({ pathname, recipe }) {
 }
 
 ShareAndFavorite.propTypes = {
+  showFavoriteButton: propTypes.bool,
   pathname: PropTypes.string,
   recipe: PropTypes.shape({
     id: PropTypes.number,
@@ -71,3 +78,5 @@ ShareAndFavorite.propTypes = {
     alcoholicOrNot: PropTypes.bool,
   }),
 }.isRequired;
+
+export default ShareAndFavorite;

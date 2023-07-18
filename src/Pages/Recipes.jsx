@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
 import { RecipesContext } from '../Context/RecipesContext';
 import RecipesCard from '../Components/RecipesCard';
 import Footer from '../Components/Footer';
 import { getGenericRecipes } from '../Service/requests';
 import RecipesFilters from '../Components/RecipesFilters';
+import { checkAuthentication } from '../Service/utils';
 
 export default function Recipes() {
   const { recipes, setRecipes, filteredRecipes, hasFilter } = useContext(RecipesContext);
@@ -16,6 +17,11 @@ export default function Recipes() {
   const foodOrDrink = pathname.includes('food') ? 'foods' : 'drinks';
   const recipesOnDisplay = !hasFilter ? recipes : filteredRecipes;
   const LIMIT = 12;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    checkAuthentication(navigate);
+  }, [navigate]);
 
   useEffect(() => {
     const getRecipes = async () => {

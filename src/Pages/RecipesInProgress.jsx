@@ -6,6 +6,7 @@ import RecipeIngredients from '../Components/RecipeIngredients';
 import { getRecipeById } from '../Service/requests';
 import { RecipesContext } from '../Context/RecipesContext';
 import { getLocalStorage, saveLocalStorage } from '../Service/storage';
+import { checkAuthentication } from '../Service/utils';
 
 export default function RecipesInProgress() {
   const { buttonDisabled } = useContext(RecipesContext);
@@ -21,7 +22,6 @@ export default function RecipesInProgress() {
     tags: 'strTags',
     name: 'strMeal',
     image: 'strMealThumb',
-    alcoholicOrNot: false,
   } : {
     id: 'idDrink',
     category: 'strCategory',
@@ -30,12 +30,16 @@ export default function RecipesInProgress() {
     tags: 'strTags',
     name: 'strDrink',
     image: 'strDrinkThumb',
-    alcoholicOrNot: true,
+    alcoholicOrNot: 'strAlcoholic',
   };
 
   const {
     id, category, nationality, type, name, tags, image, alcoholicOrNot,
   } = foodOrDrink;
+
+  useEffect(() => {
+    checkAuthentication(navigate);
+  }, [navigate]);
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -54,9 +58,22 @@ export default function RecipesInProgress() {
     getRecipe();
   }, [match]);
 
+  const getDate = () => {
+    const date = new Date();
+    const myDate = new Date(date);
+    const dateObj = {
+      day: myDate.getDate(),
+      month: myDate.getMonth() + 1,
+      year: myDate.getFullYear(),
+    };
+    const finishDate = `${dateObj.day}/${dateObj.month}/${dateObj.year}`;
+    return finishDate;
+  };
+
   const handleClick = () => {
     const payload = {
       id: recipe[id],
+      date: getDate(),
       type,
       tags: recipe[tags],
       nationality: recipe[nationality],

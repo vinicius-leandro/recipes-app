@@ -14,7 +14,7 @@ export default function RecipeHeader({ recipe, pathname }) {
     type: 'drink',
     name: 'strDrink',
     image: 'strDrinkThumb',
-    alcoholicOrNot: true,
+    alcoholicOrNot: 'strAlcoholic',
   };
 
   const { id, type, name, image, alcoholicOrNot } = foodOrDrink;
