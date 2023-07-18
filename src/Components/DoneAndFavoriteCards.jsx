@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import ShareAndFavorite from './ShareAndFavorite';
 
 export default function DoneAndFavoriteCards({ recipe, page }) {
@@ -9,48 +9,52 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
   const {
     id, image, name, nationality, category, date, tags, type, alcoholicOrNot,
   } = recipe;
+  const path = `/${type}s/${id}`;
 
   useEffect(() => {
     if (pathname.includes('done')) setShowFavoriteButton(false);
   }, [pathname, setShowFavoriteButton]);
 
   return (
-    <section>
-      <figure>
-        <img src={ image } alt="Foto da receita" />
-      </figure>
+    <Link to={ path }>
       <section>
-        <div>
-          <h2>{name}</h2>
-          {
-            type === 'food' ? (
-              <p>{`${nationality} • ${category}`}</p>
-            ) : (
-              <p>{alcoholicOrNot}</p>
-            )
-          }
-        </div>
-        <ShareAndFavorite
-          showFavoriteButton={ showFavoriteButton }
-          recipe={ recipe }
-          pathname={ `/${type}s/${id}` }
-        />
+        <figure>
+          <img src={ image } alt="Foto da receita" />
+        </figure>
+        <section>
+          <div>
+            <h2>{name}</h2>
+            {
+              type === 'food' ? (
+                <p>{`${nationality} • ${category}`}</p>
+              ) : (
+                <p>{alcoholicOrNot}</p>
+              )
+            }
+          </div>
+          <ShareAndFavorite
+            showFavoriteButton={ showFavoriteButton }
+            recipe={ recipe }
+            pathname={ path }
+          />
+        </section>
+        {
+          page === 'done recipes' && (
+            <section>
+              {`Done in: ${date}`}
+            </section>
+          )
+        }
+        {
+          type === 'food' && page === 'done recipes' && (
+            <section>
+              <p>{tags}</p>
+            </section>
+          )
+        }
       </section>
-      {
-        page === 'done recipes' && (
-          <section>
-            {`Done in: ${date}`}
-          </section>
-        )
-      }
-      {
-        type === 'food' && page === 'done recipes' && (
-          <section>
-            <p>{tags}</p>
-          </section>
-        )
-      }
-    </section>
+    </Link>
+
   );
 }
 
