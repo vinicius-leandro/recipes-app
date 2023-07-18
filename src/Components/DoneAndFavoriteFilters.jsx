@@ -1,0 +1,59 @@
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { getLocalStorage } from '../Service/storage';
+import { RecipesContext } from '../Context/RecipesContext';
+
+export default function DoneAndFavoriteFilters() {
+  const { pathname } = useLocation();
+  const { recipes, setRecipes } = useContext(RecipesContext);
+  const [doneOrFavorite, setDoneOrFavorite] = useState('');
+
+  useEffect(() => {
+    const path = pathname.includes('done') ? 'doneRecipes' : 'favoriteRecipes';
+    const doneOrFavoriteRecipes = getLocalStorage(doneOrFavorite);
+    setRecipes(doneOrFavoriteRecipes);
+    setDoneOrFavorite(path);
+  }, [pathname, setRecipes, doneOrFavorite]);
+
+  const handleFilters = (type) => {
+    const foodorDrinkRecipes = recipes.filter((recipe) => recipe.type === type);
+    setRecipes(foodorDrinkRecipes);
+  };
+
+  const removeFilters = () => {
+    const allRecipes = getLocalStorage(doneOrFavorite);
+    setRecipes(allRecipes);
+  };
+
+  return (
+    <section>
+      <section>
+        <button
+          type="button"
+          onClick={ removeFilters }
+        >
+          All
+        </button>
+      </section>
+
+      <section>
+        <button
+          type="button"
+          onClick={ () => handleFilters('food') }
+        >
+          Food
+        </button>
+      </section>
+
+      <section>
+        <button
+          type="button"
+          onClick={ () => handleFilters('drink') }
+        >
+          Drinks
+        </button>
+      </section>
+
+    </section>
+  );
+}
