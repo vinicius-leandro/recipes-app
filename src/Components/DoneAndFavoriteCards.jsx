@@ -16,44 +16,46 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
   }, [pathname, setShowFavoriteButton]);
 
   return (
-    <Link to={ path }>
-      <section>
+    <section>
+      <Link to={ path }>
         <figure>
           <img src={ image } alt="Foto da receita" />
         </figure>
-        <section>
-          <div>
+      </Link>
+      <section>
+        <div>
+          <Link to={ path }>
             <h2>{name}</h2>
-            {
-              type === 'food' ? (
-                <p>{`${nationality} • ${category}`}</p>
-              ) : (
-                <p>{alcoholicOrNot}</p>
-              )
-            }
-          </div>
-          <ShareAndFavorite
-            showFavoriteButton={ showFavoriteButton }
-            recipe={ recipe }
-            pathname={ path }
-          />
-        </section>
-        {
-          page === 'done recipes' && (
-            <section>
-              {`Done in: ${date}`}
-            </section>
-          )
-        }
-        {
-          type === 'food' && page === 'done recipes' && (
-            <section>
-              <p>{tags}</p>
-            </section>
-          )
-        }
+          </Link>
+          {
+            type === 'food' ? (
+              <p>{`${nationality} • ${category}`}</p>
+            ) : (
+              <p>{alcoholicOrNot}</p>
+            )
+          }
+        </div>
+        <ShareAndFavorite
+          showFavoriteButton={ showFavoriteButton }
+          recipe={ recipe }
+          pathname={ path }
+        />
       </section>
-    </Link>
+      {
+        page === 'done recipes' && (
+          <section>
+            {`Done in: ${date}`}
+          </section>
+        )
+      }
+      {
+        type === 'food' && page === 'done recipes' && (
+          <section>
+            <p>{tags}</p>
+          </section>
+        )
+      }
+    </section>
 
   );
 }
