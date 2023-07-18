@@ -7,7 +7,7 @@ import DoneAndFavoriteCards from '../Components/DoneAndFavoriteCards';
 export default function DoneRecipes() {
   const { recipes } = useContext(RecipesContext);
   return (
-    <div>
+    <section>
       <Header />
       <DoneAndFavoriteFilters />
       {
@@ -19,6 +19,6 @@ export default function DoneRecipes() {
           />
         ))
       }
-    </div>
+    </section>
   );
 }

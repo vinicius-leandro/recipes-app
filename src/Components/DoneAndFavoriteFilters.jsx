@@ -15,7 +15,7 @@ export default function DoneAndFavoriteFilters() {
     setRecipes(doneOrFavoriteRecipes);
     setDoneOrFavorite(path);
     setOriginalRecipes(doneOrFavoriteRecipes);
-  }, [pathname, setRecipes, doneOrFavorite]);
+  }, [pathname, setRecipes, originalRecipes]);
 
   const handleFilters = (type) => {
     const foodorDrinkRecipes = originalRecipes.filter((recipe) => recipe.type === type);

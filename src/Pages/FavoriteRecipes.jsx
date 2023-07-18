@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from '../Components/Header';
+import { RecipesContext } from '../Context/RecipesContext';
+import DoneAndFavoriteFilters from '../Components/DoneAndFavoriteFilters';
+import DoneAndFavoriteCards from '../Components/DoneAndFavoriteCards';
 
 export default function FavoriteRecipes() {
+  const { recipes } = useContext(RecipesContext);
   return (
-    <div>
+    <section>
       <Header />
-    </div>
+      <DoneAndFavoriteFilters />
+      {
+        recipes.map((doneRecipe, index) => (
+          <DoneAndFavoriteCards
+            key={ index }
+            page="favorite recipes"
+            recipe={ doneRecipe }
+          />
+        ))
+      }
+    </section>
   );
 }
