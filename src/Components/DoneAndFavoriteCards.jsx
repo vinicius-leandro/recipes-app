@@ -7,7 +7,7 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
   const { pathname } = useLocation();
   const [showFavoriteButton, setShowFavoriteButton] = useState(true);
   const {
-    image, name, nationality, category, date, tags, type, alcoholicOrNot,
+    id, image, name, nationality, category, date, tags, type, alcoholicOrNot,
   } = recipe;
 
   useEffect(() => {
@@ -30,7 +30,11 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
             )
           }
         </div>
-        <ShareAndFavorite showFavoriteButton={ showFavoriteButton } recipe={ recipe } />
+        <ShareAndFavorite
+          showFavoriteButton={ showFavoriteButton }
+          recipe={ recipe }
+          pathname={ `/${type}s/${id}` }
+        />
       </section>
       {
         page === 'done recipes' && (

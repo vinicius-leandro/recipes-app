@@ -21,7 +21,6 @@ export default function RecipesInProgress() {
     tags: 'strTags',
     name: 'strMeal',
     image: 'strMealThumb',
-    alcoholicOrNot: false,
   } : {
     id: 'idDrink',
     category: 'strCategory',
