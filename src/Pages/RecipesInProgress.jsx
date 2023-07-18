@@ -6,6 +6,7 @@ import RecipeIngredients from '../Components/RecipeIngredients';
 import { getRecipeById } from '../Service/requests';
 import { RecipesContext } from '../Context/RecipesContext';
 import { getLocalStorage, saveLocalStorage } from '../Service/storage';
+import { checkAuthentication } from '../Service/utils';
 
 export default function RecipesInProgress() {
   const { buttonDisabled } = useContext(RecipesContext);
@@ -35,6 +36,10 @@ export default function RecipesInProgress() {
   const {
     id, category, nationality, type, name, tags, image, alcoholicOrNot,
   } = foodOrDrink;
+
+  useEffect(() => {
+    checkAuthentication(navigate);
+  }, [navigate]);
 
   useEffect(() => {
     const getRecipe = async () => {

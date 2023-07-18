@@ -6,6 +6,7 @@ import { getLocalStorage, removeAllLocalStorage } from '../Service/storage';
 import doneProfileIcon from '../images/doneProfileIcon.svg';
 import favoriteProfileIcon from '../images/favoriteProfileIcon.svg';
 import logoutProfileIcon from '../images/LogoutProfileIcon.svg';
+import { checkAuthentication } from '../Service/utils';
 
 export default function Profile() {
   const [email, setEmail] = useState('');
@@ -20,6 +21,11 @@ export default function Profile() {
     removeAllLocalStorage();
     navigate('/login');
   };
+
+  useEffect(() => {
+    checkAuthentication(navigate);
+  }, [navigate]);
+
   return (
     <section>
       <Header />

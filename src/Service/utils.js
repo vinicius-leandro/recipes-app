@@ -13,4 +13,16 @@ const getIngredients = (recipe) => {
   return ingredientArray;
 };
 
-export default getIngredients;
+const authenticationToDkipLogin = (callback) => {
+  if (JSON.parse(localStorage.getItem('user'))) {
+    callback('/foods');
+  }
+};
+
+const checkAuthentication = (callback) => {
+  if (!JSON.parse(localStorage.getItem('user'))) {
+    callback('/');
+  }
+};
+
+export { getIngredients, authenticationToDkipLogin, checkAuthentication };

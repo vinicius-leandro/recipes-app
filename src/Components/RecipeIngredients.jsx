@@ -4,7 +4,7 @@ import {
   getLocalStorage, saveLocalStorage, saveOrRemoveInProgress,
 } from '../Service/storage';
 import { RecipesContext } from '../Context/RecipesContext';
-import getIngredients from '../Service/utils';
+import { getIngredients } from '../Service/utils';
 
 export default function RecipeIngredients({ recipe, pathname, id }) {
   const { setButtonDisabled } = useContext(RecipesContext);
