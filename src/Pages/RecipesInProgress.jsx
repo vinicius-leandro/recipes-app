@@ -54,9 +54,22 @@ export default function RecipesInProgress() {
     getRecipe();
   }, [match]);
 
+  const getDate = () => {
+    const date = new Date();
+    const myDate = new Date(date);
+    const dateObj = {
+      day: myDate.getDate(),
+      month: myDate.getMonth() + 1,
+      year: myDate.getFullYear(),
+    };
+    const finishDate = `${dateObj.day}/${dateObj.month}/${dateObj.year}`;
+    return finishDate;
+  };
+
   const handleClick = () => {
     const payload = {
       id: recipe[id],
+      date: getDate(),
       type,
       tags: recipe[tags],
       nationality: recipe[nationality],
