@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getLocalStorage } from '../Service/storage';
 import { RecipesContext } from '../Context/RecipesContext';
+import allDoneAndFavoriteIcon from '../images/allDoneAndFavoriteIcon.svg';
+import foodsDoneAndFavoriteIcon from '../images/foodsDoneAndFavoriteIcon.svg';
+import drinksDoneAndFavoriteIcon from '../images/drinksDoneAndFavoriteIcon.svg';
 
 export default function DoneAndFavoriteFilters() {
   const { pathname } = useLocation();
@@ -34,7 +37,7 @@ export default function DoneAndFavoriteFilters() {
           type="button"
           onClick={ removeFilters }
         >
-          All
+          <img src={ allDoneAndFavoriteIcon } alt="botão all" />
         </button>
       </section>
 
@@ -43,7 +46,7 @@ export default function DoneAndFavoriteFilters() {
           type="button"
           onClick={ () => handleFilters('food') }
         >
-          Food
+          <img src={ foodsDoneAndFavoriteIcon } alt="botão foods" />
         </button>
       </section>
 
@@ -52,7 +55,7 @@ export default function DoneAndFavoriteFilters() {
           type="button"
           onClick={ () => handleFilters('drink') }
         >
-          Drinks
+          <img src={ drinksDoneAndFavoriteIcon } alt="botão drinks" />
         </button>
       </section>
 
