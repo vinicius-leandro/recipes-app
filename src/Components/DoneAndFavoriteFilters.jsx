@@ -5,18 +5,20 @@ import { RecipesContext } from '../Context/RecipesContext';
 
 export default function DoneAndFavoriteFilters() {
   const { pathname } = useLocation();
-  const { recipes, setRecipes } = useContext(RecipesContext);
+  const { setRecipes } = useContext(RecipesContext);
+  const [originalRecipes, setOriginalRecipes] = useState([]);
   const [doneOrFavorite, setDoneOrFavorite] = useState('');
 
   useEffect(() => {
     const path = pathname.includes('done') ? 'doneRecipes' : 'favoriteRecipes';
-    const doneOrFavoriteRecipes = getLocalStorage(doneOrFavorite);
+    const doneOrFavoriteRecipes = getLocalStorage(path);
     setRecipes(doneOrFavoriteRecipes);
     setDoneOrFavorite(path);
+    setOriginalRecipes(doneOrFavoriteRecipes);
   }, [pathname, setRecipes, doneOrFavorite]);
 
   const handleFilters = (type) => {
-    const foodorDrinkRecipes = recipes.filter((recipe) => recipe.type === type);
+    const foodorDrinkRecipes = originalRecipes.filter((recipe) => recipe.type === type);
     setRecipes(foodorDrinkRecipes);
   };
 

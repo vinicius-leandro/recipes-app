@@ -30,7 +30,7 @@ export default function RecipesInProgress() {
     tags: 'strTags',
     name: 'strDrink',
     image: 'strDrinkThumb',
-    alcoholicOrNot: true,
+    alcoholicOrNot: 'strAlcoholic',
   };
 
   const {
