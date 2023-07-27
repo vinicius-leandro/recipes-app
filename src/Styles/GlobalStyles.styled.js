@@ -9,6 +9,9 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Epilogue', sans-serif;
   }
+  input, textarea, button, select {
+    font: inherit;
+  } 
 `;
 
 export default GlobalStyle;
