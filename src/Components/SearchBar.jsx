@@ -7,6 +7,10 @@ import {
   getRecipesByName,
 } from '../Service/requests';
 
+import {
+  FormContainer, InputText, InputRadioContainer, ButtonContainer,
+} from '../Styles/Components/SearchBar.styled';
+
 export default function SearchBar() {
   const navigate = useNavigate();
   const { setRecipes } = useContext(RecipesContext);
@@ -46,57 +50,56 @@ export default function SearchBar() {
   };
 
   return (
-    <section>
-      <form>
-        <section>
+    <FormContainer>
+      <section>
+        <InputText
+          type="text"
+          placeholder="Search"
+          data-testid="search-input"
+          onChange={ ({ target: { value } }) => setFilterSearch(value) }
+        />
+      </section>
+      <InputRadioContainer>
+        <label htmlFor="ingredientRadioInput">
           <input
-            type="text"
-            data-testid="search-input"
-            onChange={ ({ target: { value } }) => setFilterSearch(value) }
+            type="radio"
+            name="searchFilter"
+            id="ingredientRadioInput"
+            value="ingredient"
+            data-testid="ingredient-search-radio"
+            defaultChecked
+            onClick={ ({ target: { value } }) => setRadioInput(value) }
           />
-        </section>
-        <section>
-          <label htmlFor="ingredientRadioInput">
-            <input
-              type="radio"
-              name="searchFilter"
-              id="ingredientRadioInput"
-              value="ingredient"
-              data-testid="ingredient-search-radio"
-              defaultChecked
-              onClick={ ({ target: { value } }) => setRadioInput(value) }
-            />
-            Ingredient
-          </label>
-          <label htmlFor="nameRadioInput">
-            <input
-              type="radio"
-              name="searchFilter"
-              id="nameRadioInput"
-              value="name"
-              data-testid="name-search-radio"
-              onClick={ ({ target: { value } }) => setRadioInput(value) }
-            />
-            Name
-          </label>
-          <label htmlFor="firstLetterRadioInput">
-            <input
-              type="radio"
-              name="searchFilter"
-              id="firstLetterRadioInput"
-              value="firstLetter"
-              data-testid="first-letter-search-radio"
-              onClick={ ({ target: { value } }) => setRadioInput(value) }
-            />
-            First Letter
-          </label>
-        </section>
-        <section>
-          <button type="button" data-testid="exec-search-btn" onClick={ handleRequest }>
-            SEARCH
-          </button>
-        </section>
-      </form>
-    </section>
+          Ingredient
+        </label>
+        <label htmlFor="nameRadioInput">
+          <input
+            type="radio"
+            name="searchFilter"
+            id="nameRadioInput"
+            value="name"
+            data-testid="name-search-radio"
+            onClick={ ({ target: { value } }) => setRadioInput(value) }
+          />
+          Name
+        </label>
+        <label htmlFor="firstLetterRadioInput">
+          <input
+            type="radio"
+            name="searchFilter"
+            id="firstLetterRadioInput"
+            value="firstLetter"
+            data-testid="first-letter-search-radio"
+            onClick={ ({ target: { value } }) => setRadioInput(value) }
+          />
+          First Letter
+        </label>
+      </InputRadioContainer>
+      <ButtonContainer>
+        <button type="button" data-testid="exec-search-btn" onClick={ handleRequest }>
+          SEARCH
+        </button>
+      </ButtonContainer>
+    </FormContainer>
   );
 }

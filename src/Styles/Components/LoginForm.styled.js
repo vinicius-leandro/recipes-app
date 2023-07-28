@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  /* background-color: turquoise; */
   width: 20rem;
 
   input {
