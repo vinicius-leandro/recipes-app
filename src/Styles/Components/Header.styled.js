@@ -31,7 +31,6 @@ const UpperHeaderContainer = styled.section`
 `;
 
 const LowerHeaderContainer = styled.section`
-  /* background-color: blue; */
   display: flex;
   justify-content: center;
   width: 100vw;
@@ -42,7 +41,6 @@ const LowerHeaderContainer = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: red; */
 
     img {
       margin-bottom: 0.7rem;
