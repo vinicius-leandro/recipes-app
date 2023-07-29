@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FormContainer from '../Styles/Components/LoginForm.styled';
 import { checkInProgressRecipes,
   checkLocalStorage, saveLocalStorage } from '../Service/storage';
 
@@ -37,7 +38,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form>
+    <FormContainer>
       <input
         type="text"
         name="email"
@@ -60,6 +61,6 @@ export default function LoginForm() {
       >
         ENTER
       </button>
-    </form>
+    </FormContainer>
   );
 }

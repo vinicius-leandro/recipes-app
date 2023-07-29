@@ -4,6 +4,9 @@ import LoginForm from '../Components/LoginForm';
 import appLogo from '../images/appLogo.svg';
 import salad from '../images/salad.svg';
 import { authenticationToDkipLogin } from '../Service/utils';
+import {
+  LogoContainer, PageContainer, SaladContainer, LoginContainer,
+} from '../Styles/Pages/Login.styled';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,18 +16,19 @@ export default function Login() {
   }, [navigate]);
 
   return (
-    <>
+    <PageContainer>
       <section>
-        <figure>
+        <LogoContainer>
           <img src={ appLogo } alt="logotipo do app" />
-        </figure>
-        <figure>
+        </LogoContainer>
+        <SaladContainer>
           <img src={ salad } alt="salada com alface e tomate" />
-        </figure>
+        </SaladContainer>
       </section>
-      <section>
+      <LoginContainer>
+        <h1>LOGIN</h1>
         <LoginForm />
-      </section>
-    </>
+      </LoginContainer>
+    </PageContainer>
   );
 }

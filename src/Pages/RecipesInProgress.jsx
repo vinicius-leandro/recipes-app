@@ -100,7 +100,7 @@ export default function RecipesInProgress() {
       {
         showYtAndInstructions && (
           <RecipeInstructionsAndVideo
-            instructions={ recipe.strInstrucions }
+            instructions={ recipe.strInstructions }
             ytUrl={ recipe.strYoutube }
           />
         )

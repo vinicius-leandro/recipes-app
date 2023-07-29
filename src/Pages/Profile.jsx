@@ -7,6 +7,9 @@ import doneProfileIcon from '../images/doneProfileIcon.svg';
 import favoriteProfileIcon from '../images/favoriteProfileIcon.svg';
 import logoutProfileIcon from '../images/LogoutProfileIcon.svg';
 import { checkAuthentication } from '../Service/utils';
+import {
+  EmailContainer, ButtonsConstainer, BorderBottom, WithoutBottom,
+} from '../Styles/Pages/Profile.styled';
 
 export default function Profile() {
   const [email, setEmail] = useState('');
@@ -29,38 +32,38 @@ export default function Profile() {
   return (
     <section>
       <Header />
-      <section>
+      <EmailContainer>
         <h2>{ email }</h2>
-      </section>
-      <section>
+      </EmailContainer>
+      <ButtonsConstainer>
         <section>
-          <button
+          <BorderBottom
             type="button"
             onClick={ () => navigate('/done-recipes') }
           >
             <img src={ doneProfileIcon } alt="botão done" />
 
-          </button>
+          </BorderBottom>
         </section>
         <section>
-          <button
+          <BorderBottom
             type="button"
             onClick={ () => navigate('/favorite-recipes') }
           >
             <img src={ favoriteProfileIcon } alt="botão favorite" />
 
-          </button>
+          </BorderBottom>
         </section>
         <section>
-          <button
+          <WithoutBottom
             type="button"
             onClick={ handleLogout }
           >
             <img src={ logoutProfileIcon } alt="botão logout" />
 
-          </button>
+          </WithoutBottom>
         </section>
-      </section>
+      </ButtonsConstainer>
       <Footer />
     </section>
   );

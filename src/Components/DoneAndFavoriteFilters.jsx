@@ -5,6 +5,7 @@ import { RecipesContext } from '../Context/RecipesContext';
 import allDoneAndFavoriteIcon from '../images/allDoneAndFavoriteIcon.svg';
 import foodsDoneAndFavoriteIcon from '../images/foodsDoneAndFavoriteIcon.svg';
 import drinksDoneAndFavoriteIcon from '../images/drinksDoneAndFavoriteIcon.svg';
+import FiltersContainer from '../Styles/Components/DoneAndFavoriteFilters.styled';
 
 export default function DoneAndFavoriteFilters() {
   const { pathname } = useLocation();
@@ -31,7 +32,7 @@ export default function DoneAndFavoriteFilters() {
   };
 
   return (
-    <section>
+    <FiltersContainer>
       <section>
         <button
           type="button"
@@ -59,6 +60,6 @@ export default function DoneAndFavoriteFilters() {
         </button>
       </section>
 
-    </section>
+    </FiltersContainer>
   );
 }

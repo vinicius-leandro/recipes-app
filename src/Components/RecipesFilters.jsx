@@ -14,6 +14,7 @@ import cocktailIcon from '../images/cocktailIcon.svg';
 import shakeIcon from '../images/shakeIcon.svg';
 import otherIcon from '../images/otherIcon.svg';
 import cocoaIcon from '../images/cocoaIcon.svg';
+import FiltersContainer from '../Styles/Components/RecipesFilters.styled';
 
 export default function RecipesFilters() {
   const { setFilteredRecipes, setHasFilter } = useContext(RecipesContext);
@@ -72,7 +73,7 @@ export default function RecipesFilters() {
     setHasFilter(false);
   }, [pathname, setHasFilter]);
   return (
-    <section>
+    <FiltersContainer>
       <section>
         <button type="button" onClick={ () => setHasFilter(false) }>
           <img
@@ -146,6 +147,6 @@ export default function RecipesFilters() {
           />
         </button>
       </section>
-    </section>
+    </FiltersContainer>
   );
 }

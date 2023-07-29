@@ -10,6 +10,9 @@ import yellowProfileIcon from '../images/yellowProfileIcon.svg';
 import doneRecipesIcon from '../images/doneRecipesIcon.svg';
 import favoriteRecipesIcon from '../images/favoriteRecipesIcon.svg';
 import SearchBar from './SearchBar';
+import {
+  UpperHeaderContainer, LowerHeaderContainer,
+} from '../Styles/Components/Header.styled';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -28,24 +31,24 @@ export default function Header() {
   useEffect(() => {
     if (pathname !== '/foods') {
       const pathnames = {
-        '/drinks': () => { handlePathNames('Drinks', true, cupIcon); },
-        '/profile': () => { handlePathNames('Profile', false, yellowProfileIcon); },
+        '/drinks': () => { handlePathNames('DRINKS', true, cupIcon); },
+        '/profile': () => { handlePathNames('PROFILE', false, yellowProfileIcon); },
         '/done-recipes': () => {
-          handlePathNames('Done Recipes', false, doneRecipesIcon);
+          handlePathNames('DONE RECIPES', false, doneRecipesIcon);
         },
         '/favorite-recipes': () => {
-          handlePathNames('Favorite Recipes', false, favoriteRecipesIcon);
+          handlePathNames('FAVORITES', false, favoriteRecipesIcon);
         },
       };
       pathnames[pathname]();
     } else {
-      handlePathNames('Foods', true, dishIcon);
+      handlePathNames('MEALS', true, dishIcon);
     }
   }, [pathname]);
 
   return (
     <header>
-      <section>
+      <UpperHeaderContainer>
         <Link to="/foods">
           <figure>
             <img src={ trayWithClocheAndHeart } alt="Bandeja de restaurante" />
@@ -75,13 +78,13 @@ export default function Header() {
             />
           </button>
         </div>
-      </section>
-      <section>
+      </UpperHeaderContainer>
+      <LowerHeaderContainer>
         <div>
           <img src={ pageIcon } alt="icone de prato com garfo e faca" />
           <h1 data-testid="page-title">{ title }</h1>
         </div>
-      </section>
+      </LowerHeaderContainer>
       {
         isSearchIconClicked && <SearchBar />
       }
