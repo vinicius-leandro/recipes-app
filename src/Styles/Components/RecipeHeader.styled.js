@@ -32,9 +32,7 @@ const HeaderContainer = styled.section`
   section {
     top: 0.5vh;
     right: 2vw;
-    /* display: flex;
-    justify-content: space-between;
-    width: 3.5rem; */
+    width: 3.5rem;
   }
 
   h1 {

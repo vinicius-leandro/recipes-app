@@ -42,7 +42,7 @@ export default function RecipesDetails() {
       {
         showYtAndInstructions && (
           <RecipeInstructionsAndVideo
-            instructions={ recipe.strInstrucions }
+            instructions={ recipe.strInstructions }
             ytUrl={ recipe.strYoutube }
           />
         )

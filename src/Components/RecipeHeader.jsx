@@ -38,7 +38,7 @@ export default function RecipeHeader({ recipe, pathname }) {
             } }
           />
         </section>
-        <h1>{(recipe[name]).toUpperCase()}</h1>
+        <h1>{recipe[name]}</h1>
       </div>
     </HeaderContainer>
   );

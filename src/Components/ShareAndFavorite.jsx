@@ -8,6 +8,7 @@ import emptyHeartIcon from '../images/emptyHeartIcon.svg';
 import fullHeartIcon from '../images/fullHeartIcon.svg';
 import { getLocalStorage, removeLocalStorage,
   saveLocalStorage } from '../Service/storage';
+import ButtonsContainer from '../Styles/Components/ShareAndFavorite.styled';
 
 function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
   const { isFavorite, setIsFavorite } = useContext(RecipesContext);
@@ -43,7 +44,7 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
   };
 
   return (
-    <section>
+    <ButtonsContainer>
       <section>
         <button type="button" onClick={ handleShareButton }>
           <img src={ shareIcon } alt="botão de compartilhar" />
@@ -61,7 +62,7 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
           <span>Link Copied!</span>
         )
       }
-    </section>
+    </ButtonsContainer>
   );
 }
 
