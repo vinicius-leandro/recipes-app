@@ -39,6 +39,7 @@ const HeaderContainer = styled.section`
     top: 12.5vh;
     left: 50vw;
     transform: translate(-50%, -50%);
+    text-align: center;
     color: white;
     font-weight: 900;
     font-size: 20px;
