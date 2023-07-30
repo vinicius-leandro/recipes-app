@@ -7,6 +7,7 @@ import { getRecipeById } from '../Service/requests';
 import { RecipesContext } from '../Context/RecipesContext';
 import { getLocalStorage, saveLocalStorage } from '../Service/storage';
 import { checkAuthentication } from '../Service/utils';
+import ButtonContainer from '../Styles/Pages/RecipesInProgress.styled';
 
 export default function RecipesInProgress() {
   const { buttonDisabled } = useContext(RecipesContext);
@@ -105,15 +106,15 @@ export default function RecipesInProgress() {
           />
         )
       }
-      <section>
+      <ButtonContainer>
         <button
           type="button"
           onClick={ handleClick }
           disabled={ buttonDisabled }
         >
-          Finish Recipe
+          FINISH RECIPE
         </button>
-      </section>
+      </ButtonContainer>
     </section>
   );
 }

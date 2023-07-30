@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { getLocalStorage } from '../Service/storage';
-import ButtonContainer from '../Styles/Components/RecipesDatailsButton.styled';
+import ButtonContainer from '../Styles/Components/RecipesDetailsButton.styled';
 
 export default function RecipesDetailsButton({ id, mealsOrCocktails }) {
   const [alreadyDone, setAlreadyDone] = useState(false);
