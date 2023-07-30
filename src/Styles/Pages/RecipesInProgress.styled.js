@@ -13,6 +13,11 @@ const ButtonContainer = styled.section`
     font-weight: 700;
     letter-spacing: 2px;
     width: 100%;
+
+    
+    &:disabled {
+      background-color: #B1B1B1;
+    }
   }
 `;
 

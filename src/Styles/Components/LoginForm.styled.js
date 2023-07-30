@@ -31,6 +31,10 @@ const FormContainer = styled.form`
     background-color: ${(props) => props.theme.colors.yellow};
     color: white;
     font-weight: 700;
+
+    &:disabled {
+      background-color: #B1B1B1;
+    }
   }
 `;
 
