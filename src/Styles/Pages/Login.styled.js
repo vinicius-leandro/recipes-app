@@ -13,7 +13,7 @@ const PageContainer = styled.section`
 const LogoContainer = styled.figure`
   display: flex;
   justify-content: center;
-  padding-top: 2rem;
+  padding-top: 1rem;
 `;
 
 const SaladContainer = styled.figure`
@@ -33,7 +33,7 @@ const LoginContainer = styled.section`
     font-size: 1.25rem;
     font-style: italic;
     letter-spacing: 3px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 `;
 
