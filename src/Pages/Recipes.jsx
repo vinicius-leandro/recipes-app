@@ -7,6 +7,7 @@ import Footer from '../Components/Footer';
 import { getGenericRecipes } from '../Service/requests';
 import RecipesFilters from '../Components/RecipesFilters';
 import { checkAuthentication } from '../Service/utils';
+import RecipesCardContainer from '../Styles/Pages/Recipes.styled';
 
 export default function Recipes() {
   const { recipes, setRecipes, filteredRecipes, hasFilter } = useContext(RecipesContext);
@@ -41,7 +42,7 @@ export default function Recipes() {
     <>
       <Header />
       <RecipesFilters />
-      <section>
+      <RecipesCardContainer>
         {
           recipesOnDisplay.slice(0, LIMIT).map((recipe, index) => (
             <RecipesCard
@@ -53,7 +54,7 @@ export default function Recipes() {
             />
           ))
         }
-      </section>
+      </RecipesCardContainer>
       <Footer />
     </>
   );
