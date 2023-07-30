@@ -5,6 +5,10 @@ import {
 } from '../Service/storage';
 import { RecipesContext } from '../Context/RecipesContext';
 import { getIngredients } from '../Service/utils';
+import {
+  IngredientsCheckbox,
+  IngredientsContainer, IngredientsList,
+} from '../Styles/Components/RecipeIngredients.styled';
 
 export default function RecipeIngredients({ recipe, pathname, id }) {
   const { setButtonDisabled } = useContext(RecipesContext);
@@ -42,24 +46,26 @@ export default function RecipeIngredients({ recipe, pathname, id }) {
   }, [checkedIngredients, ingredients, setButtonDisabled]);
 
   return (
-    <section>
+    <IngredientsContainer>
       <h2>Ingredients</h2>
       {
         detailsOrInProgress === 'details' ? (
-          <div>
+          <IngredientsList>
             <ul>
               {
                 ingredients.map((ingredient) => (
-                  <li key={ ingredient }>{ingredient}</li>
+                  <li key={ ingredient }>
+                    <span>{ingredient}</span>
+                  </li>
                 ))
               }
             </ul>
-          </div>
+          </IngredientsList>
         ) : (
-          <div>
+          <section>
             {
               ingredients.map((ingredient) => (
-                <div key={ ingredient }>
+                <IngredientsCheckbox key={ ingredient }>
                   <label htmlFor={ ingredient }>
                     <input
                       type="checkbox"
@@ -73,13 +79,13 @@ export default function RecipeIngredients({ recipe, pathname, id }) {
                     />
                     {ingredient}
                   </label>
-                </div>
+                </IngredientsCheckbox>
               ))
             }
-          </div>
+          </section>
         )
       }
-    </section>
+    </IngredientsContainer>
   );
 }
 
