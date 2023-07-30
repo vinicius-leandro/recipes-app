@@ -1,23 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  InstructionsContainer, VideoContainer,
+} from '../Styles/Components/RecipeInstructionsAndVideo.styled';
 
 export default function RecipeInstructionsAndVideo({ instructions, ytUrl }) {
   const INITIAL_CODE_VIDEO = 33;
+  console.log(instructions);
 
   return (
     <>
-      <section>
+      <InstructionsContainer>
         <h2>Instructions</h2>
         <div>
           <p>{instructions}</p>
         </div>
-      </section>
-      <section>
+      </InstructionsContainer>
+      <VideoContainer>
         <h2>Video</h2>
         <div>
           <iframe
-            width="560"
-            height="315"
             src={
               `https://www.youtube-nocookie.com/embed/${JSON.stringify(ytUrl).slice(INITIAL_CODE_VIDEO, ytUrl.lastIndexOf(' '))}`
             }
@@ -26,7 +28,7 @@ export default function RecipeInstructionsAndVideo({ instructions, ytUrl }) {
           />
         </div>
 
-      </section>
+      </VideoContainer>
     </>
   );
 }

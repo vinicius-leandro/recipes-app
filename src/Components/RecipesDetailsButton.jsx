@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { getLocalStorage } from '../Service/storage';
+import ButtonContainer from '../Styles/Components/RecipesDetailsButton.styled';
 
 export default function RecipesDetailsButton({ id, mealsOrCocktails }) {
   const [alreadyDone, setAlreadyDone] = useState(false);
-  const [buttonText, setButtonText] = useState('Start Recipe');
+  const [buttonText, setButtonText] = useState('START RECIPE');
   const navigate = useNavigate();
   useEffect(() => {
     const doneRecipes = getLocalStorage('doneRecipes');
@@ -16,11 +17,11 @@ export default function RecipesDetailsButton({ id, mealsOrCocktails }) {
     const inProgressRecipes = getLocalStorage('inProgressRecipes');
     const inProgressKeys = Object.keys(inProgressRecipes[mealsOrCocktails]);
     inProgressKeys.forEach((recipe) => {
-      if (recipe === id) setButtonText('Continue Recipe');
+      if (recipe === id) setButtonText('CONTINUE RECIPE');
     });
   }, [id, mealsOrCocktails]);
   return (
-    <section>
+    <ButtonContainer>
       {
         !alreadyDone && (
           <button
@@ -31,7 +32,7 @@ export default function RecipesDetailsButton({ id, mealsOrCocktails }) {
           </button>
         )
       }
-    </section>
+    </ButtonContainer>
   );
 }
 

@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import RecipesCardStyled from '../Styles/Components/RecipesCard.styled';
 
 export default function RecipesCard({ foodOrDrink, recipeImage, recipeName, recipeId }) {
   return (
     <Link to={ `/${foodOrDrink}/${recipeId}` }>
-      <section>
+      <RecipesCardStyled>
         <img src={ recipeImage } alt={ recipeName } />
         <p>{ recipeName }</p>
-      </section>
+      </RecipesCardStyled>
     </Link>
 
   );
