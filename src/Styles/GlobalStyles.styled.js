@@ -6,12 +6,14 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     box-sizing: border-box;
   }
-  body {
+  html, body {
     font-family: 'Epilogue', sans-serif;
+    overflow-x: hidden;
   }
+
   input, textarea, button, select {
     font: inherit;
-  } 
+  }
 `;
 
 export default GlobalStyle;
