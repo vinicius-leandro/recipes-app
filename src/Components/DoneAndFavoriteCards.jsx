@@ -2,27 +2,33 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, Link } from 'react-router-dom';
 import ShareAndFavorite from './ShareAndFavorite';
+import {
+  DoneAndFavoriteCard, CardInfoContainer, ShareButtonContainer,
+} from '../Styles/Components/DoneAndFavoriteCard.styled';
 
 export default function DoneAndFavoriteCards({ recipe, page }) {
   const { pathname } = useLocation();
   const [showFavoriteButton, setShowFavoriteButton] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(true);
   const {
     id, image, name, nationality, category, date, tags, type, alcoholicOrNot,
   } = recipe;
   const path = `/${type}s/${id}`;
 
   useEffect(() => {
-    if (pathname.includes('done')) setShowFavoriteButton(false);
+    if (pathname.includes('done')) {
+      setShowFavoriteButton(false);
+      setIsFavorite(false);
+    }
   }, [pathname, setShowFavoriteButton]);
-
   return (
-    <section>
+    <DoneAndFavoriteCard $isFavorite={ isFavorite }>
       <Link to={ path }>
         <figure>
           <img src={ image } alt="Foto da receita" />
         </figure>
       </Link>
-      <section>
+      <CardInfoContainer $isFavorite={ isFavorite }>
         <div>
           <Link to={ path }>
             <h2>{name}</h2>
@@ -35,28 +41,29 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
             )
           }
         </div>
+        {
+          page === 'done recipes' && (
+            <section>
+              <p>{`Done in: ${date}`}</p>
+            </section>
+          )
+        }
+        {
+          type === 'food' && page === 'done recipes' && tags !== null && (
+            <section>
+              <span>{tags}</span>
+            </section>
+          )
+        }
+      </CardInfoContainer>
+      <ShareButtonContainer $isFavorite={ isFavorite }>
         <ShareAndFavorite
           showFavoriteButton={ showFavoriteButton }
           recipe={ recipe }
           pathname={ path }
         />
-      </section>
-      {
-        page === 'done recipes' && (
-          <section>
-            {`Done in: ${date}`}
-          </section>
-        )
-      }
-      {
-        type === 'food' && page === 'done recipes' && (
-          <section>
-            <p>{tags}</p>
-          </section>
-        )
-      }
-    </section>
-
+      </ShareButtonContainer>
+    </DoneAndFavoriteCard>
   );
 }
 

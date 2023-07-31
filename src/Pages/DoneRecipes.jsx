@@ -5,6 +5,7 @@ import { RecipesContext } from '../Context/RecipesContext';
 import DoneAndFavoriteFilters from '../Components/DoneAndFavoriteFilters';
 import DoneAndFavoriteCards from '../Components/DoneAndFavoriteCards';
 import { checkAuthentication } from '../Service/utils';
+import DoneAndFavoriteCardContainer from '../Styles/Pages/DoneAndFavorite';
 
 export default function DoneRecipes() {
   const { recipes } = useContext(RecipesContext);
@@ -18,15 +19,17 @@ export default function DoneRecipes() {
     <section>
       <Header />
       <DoneAndFavoriteFilters />
-      {
-        recipes.map((doneRecipe, index) => (
-          <DoneAndFavoriteCards
-            key={ index }
-            page="done recipes"
-            recipe={ doneRecipe }
-          />
-        ))
-      }
+      <DoneAndFavoriteCardContainer>
+        {
+          recipes.map((doneRecipe, index) => (
+            <DoneAndFavoriteCards
+              key={ index }
+              page="done recipes"
+              recipe={ doneRecipe }
+            />
+          ))
+        }
+      </DoneAndFavoriteCardContainer>
     </section>
   );
 }
