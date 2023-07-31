@@ -5,6 +5,7 @@ const InstructionsContainer = styled.section`
   h2 {
     font-weight: 700;
     font-size: 25px;
+    margin-left: 0.7rem;
   }
 
   div {
@@ -20,6 +21,7 @@ const VideoContainer = styled.section`
   h2 {
     font-weight: 700;
     font-size: 25px;
+    margin-left: 0.7rem;
   }
 
   div {

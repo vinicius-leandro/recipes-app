@@ -3,6 +3,9 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useLocation } from 'react-router-dom';
 import { getGenericRecipes } from '../Service/requests';
+import {
+  ControledCarouselContainer, CarouselCard,
+} from '../Styles/Components/ControledCarousel.styled';
 
 export default function ControlledCarousel() {
   const [recommendations, setRecommendations] = useState([]);
@@ -27,30 +30,32 @@ export default function ControlledCarousel() {
     },
   };
   return (
-    <section>
+    <ControledCarouselContainer>
       <h2>Recommended</h2>
-      <Carousel
-        draggable={ false }
-        responsive={ responsive }
-        ssr // means to render carousel on server-side.
-        infinite
-        autoPlay={ false }
-        containerClass="carousel-container"
-        removeArrowOnDeviceType={ ['tablet', 'mobile'] }
-        deviceType="mobile"
-        itemClass="carousel-item-padding-40-px"
-      >
-        {
-          recommendations.slice(0, LIMIT).map((recipe) => (
-            <div key={ recipe[recipeName] }>
-              <figure>
-                <img src={ recipe[recipeImage] } alt={ recipe[recipeName] } />
-              </figure>
-              <h3>{recipe[recipeName]}</h3>
-            </div>
-          ))
-        }
-      </Carousel>
-    </section>
+      <section>
+        <Carousel
+          draggable={ false }
+          responsive={ responsive }
+          ssr // means to render carousel on server-side.
+          infinite
+          autoPlay={ false }
+          containerClass="carousel-container"
+          removeArrowOnDeviceType={ ['tablet', 'mobile'] }
+          deviceType="mobile"
+          itemClass="carousel-item-padding-40-px"
+        >
+          {
+            recommendations.slice(0, LIMIT).map((recipe) => (
+              <CarouselCard key={ recipe[recipeName] }>
+                <figure>
+                  <img src={ recipe[recipeImage] } alt={ recipe[recipeName] } />
+                </figure>
+                <h3>{recipe[recipeName]}</h3>
+              </CarouselCard>
+            ))
+          }
+        </Carousel>
+      </section>
+    </ControledCarouselContainer>
   );
 }
