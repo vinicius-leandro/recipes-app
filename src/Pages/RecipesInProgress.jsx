@@ -14,7 +14,7 @@ export default function RecipesInProgress() {
   const navigate = useNavigate();
   const match = useMatches();
   const [recipe, setRecipe] = useState({});
-  const [showYtAndInstructions, setShowYtAndInstructions] = useState(false);
+  const [showYt, setShowYt] = useState(false);
   const foodOrDrink = match[1].pathname.includes('food') ? {
     id: 'idMeal',
     category: 'strCategory',
@@ -48,11 +48,11 @@ export default function RecipesInProgress() {
         const [result] = await getRecipeById('meals', match[1].params.id);
         JSON.stringify(result.strYoutube);
         setRecipe(result);
-        setShowYtAndInstructions(true);
+        setShowYt(true);
       } else {
         const [result] = await getRecipeById('drinks', match[1].params.id);
         setRecipe(result);
-        setShowYtAndInstructions(false);
+        setShowYt(false);
       }
     };
 
@@ -98,14 +98,12 @@ export default function RecipesInProgress() {
         pathname={ match[1].pathname }
         id={ match[1].params.id }
       />
-      {
-        showYtAndInstructions && (
-          <RecipeInstructionsAndVideo
-            instructions={ recipe.strInstructions }
-            ytUrl={ recipe.strYoutube }
-          />
-        )
-      }
+      <RecipeInstructionsAndVideo
+        instructions={ recipe.strInstructions }
+        ytUrl={ recipe.strYoutube }
+        showYt={ showYt }
+      />
+
       <ButtonContainer>
         <button
           type="button"
