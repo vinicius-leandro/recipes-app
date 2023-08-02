@@ -27,7 +27,7 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true, url }) 
 
   const handleShareButton = () => {
     const TWO_SECONDS = 2000;
-    copy(`recipes-app-vinicius-leandro.vercel.app${pathname}`);
+    copy(`https://recipes-app-vinicius-leandro.vercel.app${pathname}`);
     setShareButtonClicked(true);
     setTimeout(() => {
       setShareButtonClicked(false);
