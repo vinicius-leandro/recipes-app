@@ -8,9 +8,11 @@ import emptyHeartIcon from '../images/emptyHeartIcon.svg';
 import fullHeartIcon from '../images/fullHeartIcon.svg';
 import { getLocalStorage, removeLocalStorage,
   saveLocalStorage } from '../Service/storage';
-import ButtonsContainer from '../Styles/Components/ShareAndFavorite.styled';
+import {
+  ButtonsContainer, MessageLinkCopied,
+} from '../Styles/Components/ShareAndFavorite.styled';
 
-function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
+function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true, url }) {
   const { isFavorite, setIsFavorite } = useContext(RecipesContext);
   const [shareButtonClicked, setShareButtonClicked] = useState(false);
   const favoriteButtonIcon = !isFavorite ? emptyHeartIcon : fullHeartIcon;
@@ -44,7 +46,7 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
   };
 
   return (
-    <ButtonsContainer>
+    <ButtonsContainer $shareButtonClicked={ shareButtonClicked } $url={ url }>
       <section>
         <button type="button" onClick={ handleShareButton }>
           <img src={ shareIcon } alt="botão de compartilhar" />
@@ -59,7 +61,9 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
       </section>
       {
         shareButtonClicked && (
-          <span>Link Copied!</span>
+          <MessageLinkCopied $url={ url }>
+            <span>Link Copied!</span>
+          </MessageLinkCopied>
         )
       }
     </ButtonsContainer>
@@ -69,6 +73,7 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
 ShareAndFavorite.propTypes = {
   showFavoriteButton: propTypes.bool,
   pathname: PropTypes.string,
+  url: PropTypes.string,
   recipe: PropTypes.shape({
     id: PropTypes.number,
     type: PropTypes.string,

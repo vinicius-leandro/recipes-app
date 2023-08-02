@@ -61,6 +61,7 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
           showFavoriteButton={ showFavoriteButton }
           recipe={ recipe }
           pathname={ path }
+          url={ pathname }
         />
       </ShareButtonContainer>
     </DoneAndFavoriteCard>

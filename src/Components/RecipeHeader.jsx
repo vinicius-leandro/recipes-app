@@ -27,6 +27,7 @@ export default function RecipeHeader({ recipe, pathname }) {
         <section>
           <ShareAndFavorite
             pathname={ pathname }
+            url={ pathname }
             recipe={ {
               id: recipe[id],
               type,
