@@ -6,23 +6,23 @@ export const RecipesContext = createContext([]);
 export function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
-  const [isFavorite, setIsFavorite] = useState(false);
   const [hasFilter, setHasFilter] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [changing, setChanging] = useState([]);
   const value = useMemo(
     () => ({
       recipes,
       filteredRecipes,
       hasFilter,
-      isFavorite,
       buttonDisabled,
+      changing,
       setRecipes,
       setHasFilter,
-      setIsFavorite,
       setFilteredRecipes,
       setButtonDisabled,
+      setChanging,
     }),
-    [filteredRecipes, recipes, hasFilter, buttonDisabled, isFavorite],
+    [filteredRecipes, recipes, hasFilter, buttonDisabled, changing],
   );
 
   return (

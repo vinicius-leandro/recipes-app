@@ -5,7 +5,6 @@ const RecipesCardContainer = styled.section`
     width: 100vw;
     display: flex;
     flex-wrap: wrap;
-    padding-right: 0.5rem;
 
     a {
     text-decoration: none;

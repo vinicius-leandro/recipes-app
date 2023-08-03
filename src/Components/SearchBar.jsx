@@ -17,6 +17,8 @@ export default function SearchBar() {
   const { pathname } = useLocation();
   const [filterSearch, setFilterSearch] = useState('');
   const [radioInput, setRadioInput] = useState('ingredient');
+  const MAX_LENGTH_DEFAULT = 524288;
+  const [maxLength, setMaxLength] = useState(MAX_LENGTH_DEFAULT);
 
   const handleOnlyOneResult = (result, url) => {
     if (result.length === 1 && url === 'meals') {
@@ -37,15 +39,23 @@ export default function SearchBar() {
       firstLetter: (choice, firstLetter) => getRecipesByFirstLetter(choice, firstLetter),
     };
 
-    if (radioInput === 'firstLetter' && filterSearch.length !== 1) {
-      global.alert('Your search must have only 1 (one) character');
-    } else {
-      const result = await filters[radioInput](apiUrl, filterSearch);
-      if (result[apiUrl] === null || result.length === 0) {
-        global.alert('Sorry, we haven\'t found any recipes for these filters.');
-      }
+    const result = await filters[radioInput](apiUrl, filterSearch);
+    if (result[apiUrl] !== null || result.length > 0) {
       handleOnlyOneResult(result[apiUrl], apiUrl);
       setRecipes(result[apiUrl]);
+    } else {
+      setRecipes([]);
+    }
+  };
+
+  const handleRadioClick = (value) => {
+    setRadioInput(value);
+    setFilterSearch('');
+
+    if (value === 'firstLetter') {
+      setMaxLength(1);
+    } else {
+      setMaxLength(MAX_LENGTH_DEFAULT);
     }
   };
 
@@ -56,6 +66,8 @@ export default function SearchBar() {
           type="text"
           placeholder="Search"
           data-testid="search-input"
+          maxLength={ maxLength }
+          value={ filterSearch }
           onChange={ ({ target: { value } }) => setFilterSearch(value) }
         />
       </section>
@@ -68,7 +80,7 @@ export default function SearchBar() {
             value="ingredient"
             data-testid="ingredient-search-radio"
             defaultChecked
-            onClick={ ({ target: { value } }) => setRadioInput(value) }
+            onClick={ ({ target: { value } }) => handleRadioClick(value) }
           />
           Ingredient
         </label>
@@ -79,7 +91,7 @@ export default function SearchBar() {
             id="nameRadioInput"
             value="name"
             data-testid="name-search-radio"
-            onClick={ ({ target: { value } }) => setRadioInput(value) }
+            onClick={ ({ target: { value } }) => handleRadioClick(value) }
           />
           Name
         </label>
@@ -90,7 +102,7 @@ export default function SearchBar() {
             id="firstLetterRadioInput"
             value="firstLetter"
             data-testid="first-letter-search-radio"
-            onClick={ ({ target: { value } }) => setRadioInput(value) }
+            onClick={ ({ target: { value } }) => handleRadioClick(value) }
           />
           First Letter
         </label>

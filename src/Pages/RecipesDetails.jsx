@@ -11,7 +11,7 @@ import { checkAuthentication } from '../Service/utils';
 export default function RecipesDetails() {
   const match = useMatches();
   const [recipe, setRecipe] = useState({});
-  const [showYtAndInstructions, setShowYtAndInstructions] = useState(false);
+  const [showYt, setShowYt] = useState(false);
   const mealsOrCocktails = match[1].pathname.includes('food') ? 'meals' : 'cocktails';
   const navigate = useNavigate();
 
@@ -25,11 +25,11 @@ export default function RecipesDetails() {
         const [result] = await getRecipeById('meals', match[1].params.id);
         JSON.stringify(result.strYoutube);
         setRecipe(result);
-        setShowYtAndInstructions(true);
+        setShowYt(true);
       } else {
         const [result] = await getRecipeById('drinks', match[1].params.id);
         setRecipe(result);
-        setShowYtAndInstructions(false);
+        setShowYt(false);
       }
     };
 
@@ -39,14 +39,11 @@ export default function RecipesDetails() {
     <section>
       <RecipeHeader recipe={ recipe } pathname={ match[1].pathname } />
       <RecipeIngredients recipe={ recipe } pathname={ match[1].pathname } />
-      {
-        showYtAndInstructions && (
-          <RecipeInstructionsAndVideo
-            instructions={ recipe.strInstructions }
-            ytUrl={ recipe.strYoutube }
-          />
-        )
-      }
+      <RecipeInstructionsAndVideo
+        instructions={ recipe.strInstructions }
+        ytUrl={ recipe.strYoutube }
+        showYt={ showYt }
+      />
       <ControlledCarousel />
       <RecipesDetailsButton
         id={ match[1].params.id }

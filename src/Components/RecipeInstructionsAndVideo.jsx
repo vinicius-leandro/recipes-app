@@ -4,9 +4,8 @@ import {
   InstructionsContainer, VideoContainer,
 } from '../Styles/Components/RecipeInstructionsAndVideo.styled';
 
-export default function RecipeInstructionsAndVideo({ instructions, ytUrl }) {
+export default function RecipeInstructionsAndVideo({ instructions, ytUrl = '', showYt }) {
   const INITIAL_CODE_VIDEO = 33;
-
   return (
     <>
       <InstructionsContainer>
@@ -15,19 +14,23 @@ export default function RecipeInstructionsAndVideo({ instructions, ytUrl }) {
           <p>{instructions}</p>
         </div>
       </InstructionsContainer>
-      <VideoContainer>
-        <h2>Video</h2>
-        <div>
-          <iframe
-            src={
-              `https://www.youtube-nocookie.com/embed/${JSON.stringify(ytUrl).slice(INITIAL_CODE_VIDEO, ytUrl.lastIndexOf(' '))}`
-            }
-            title="YouTube video player"
-            allowFullScreen
-          />
-        </div>
+      {
+        showYt && (
+          <VideoContainer>
+            <h2>Video</h2>
+            <div>
+              <iframe
+                src={
+                  `https://www.youtube-nocookie.com/embed/${JSON.stringify(ytUrl).slice(INITIAL_CODE_VIDEO, ytUrl.lastIndexOf(' '))}`
+                }
+                title="YouTube video player"
+                allowFullScreen
+              />
+            </div>
 
-      </VideoContainer>
+          </VideoContainer>
+        )
+      }
     </>
   );
 }
@@ -35,4 +38,5 @@ export default function RecipeInstructionsAndVideo({ instructions, ytUrl }) {
 RecipeInstructionsAndVideo.propTypes = {
   instructions: PropTypes.string,
   ytUrl: PropTypes.string,
+  showYt: PropTypes.bool,
 }.isRequired;

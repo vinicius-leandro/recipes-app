@@ -9,7 +9,7 @@ import FiltersContainer from '../Styles/Components/DoneAndFavoriteFilters.styled
 
 export default function DoneAndFavoriteFilters() {
   const { pathname } = useLocation();
-  const { setRecipes, isFavorite } = useContext(RecipesContext);
+  const { setRecipes, changing } = useContext(RecipesContext);
   const [originalRecipes, setOriginalRecipes] = useState([]);
   const [doneOrFavorite, setDoneOrFavorite] = useState('');
 
@@ -19,7 +19,7 @@ export default function DoneAndFavoriteFilters() {
     setRecipes(doneOrFavoriteRecipes);
     setDoneOrFavorite(path);
     setOriginalRecipes(doneOrFavoriteRecipes);
-  }, [pathname, setRecipes, isFavorite]);
+  }, [pathname, setRecipes, changing]);
 
   const handleFilters = (type) => {
     const foodorDrinkRecipes = originalRecipes.filter((recipe) => recipe.type === type);

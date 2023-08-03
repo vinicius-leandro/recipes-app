@@ -23,9 +23,13 @@ const IngredientsList = styled.section`
     li {
       margin-bottom: 0.6rem;
 
-      span {
-        margin-left: -0.6rem;
-      }
+
+      @media screen and (-webkit-min-device-pixel-ratio:0)
+        and (min-resolution:.001dpcm) {
+          span{
+            margin-left: -0.6rem;
+          } 
+        }
     }
   }
 `;

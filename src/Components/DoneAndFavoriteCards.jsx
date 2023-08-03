@@ -9,7 +9,7 @@ import {
 export default function DoneAndFavoriteCards({ recipe, page }) {
   const { pathname } = useLocation();
   const [showFavoriteButton, setShowFavoriteButton] = useState(true);
-  const [isFavorite, setIsFavorite] = useState(true);
+  const [isFavoritePage, setIsFavoritePage] = useState(true);
   const {
     id, image, name, nationality, category, date, tags, type, alcoholicOrNot,
   } = recipe;
@@ -18,17 +18,18 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
   useEffect(() => {
     if (pathname.includes('done')) {
       setShowFavoriteButton(false);
-      setIsFavorite(false);
+      setIsFavoritePage(false);
     }
   }, [pathname, setShowFavoriteButton]);
+
   return (
-    <DoneAndFavoriteCard $isFavorite={ isFavorite }>
+    <DoneAndFavoriteCard $isFavorite={ isFavoritePage }>
       <Link to={ path }>
         <figure>
           <img src={ image } alt="Foto da receita" />
         </figure>
       </Link>
-      <CardInfoContainer $isFavorite={ isFavorite }>
+      <CardInfoContainer $isFavorite={ isFavoritePage }>
         <div>
           <Link to={ path }>
             <h2>{name}</h2>
@@ -48,19 +49,21 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
             </section>
           )
         }
-        {
-          type === 'food' && page === 'done recipes' && tags !== null && (
-            <section>
-              <span>{tags}</span>
-            </section>
-          )
-        }
+        <section>
+          {
+            tags.split(', ').map((tag) => type === 'food'
+            && page === 'done recipes' && tags !== null && (
+              <span key={ tag }>{tag}</span>
+            ))
+          }
+        </section>
       </CardInfoContainer>
-      <ShareButtonContainer $isFavorite={ isFavorite }>
+      <ShareButtonContainer $isFavorite={ isFavoritePage }>
         <ShareAndFavorite
           showFavoriteButton={ showFavoriteButton }
           recipe={ recipe }
           pathname={ path }
+          url={ pathname }
         />
       </ShareButtonContainer>
     </DoneAndFavoriteCard>

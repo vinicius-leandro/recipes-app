@@ -8,10 +8,13 @@ import emptyHeartIcon from '../images/emptyHeartIcon.svg';
 import fullHeartIcon from '../images/fullHeartIcon.svg';
 import { getLocalStorage, removeLocalStorage,
   saveLocalStorage } from '../Service/storage';
-import ButtonsContainer from '../Styles/Components/ShareAndFavorite.styled';
+import {
+  ButtonsContainer, MessageLinkCopied,
+} from '../Styles/Components/ShareAndFavorite.styled';
 
-function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
-  const { isFavorite, setIsFavorite } = useContext(RecipesContext);
+function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true, url }) {
+  const { setChanging } = useContext(RecipesContext);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [shareButtonClicked, setShareButtonClicked] = useState(false);
   const favoriteButtonIcon = !isFavorite ? emptyHeartIcon : fullHeartIcon;
 
@@ -25,7 +28,7 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
 
   const handleShareButton = () => {
     const TWO_SECONDS = 2000;
-    copy(`recipes-app-vinicius-leandro.vercel.app${pathname}`);
+    copy(`https://recipes-app-vinicius-leandro.vercel.app${pathname}`);
     setShareButtonClicked(true);
     setTimeout(() => {
       setShareButtonClicked(false);
@@ -41,10 +44,11 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
       saveLocalStorage('favoriteRecipes', newFavoriteRecipes);
     }
     setIsFavorite((prevState) => !prevState);
+    setChanging((prevState) => !prevState);
   };
 
   return (
-    <ButtonsContainer>
+    <ButtonsContainer $shareButtonClicked={ shareButtonClicked } $url={ url }>
       <section>
         <button type="button" onClick={ handleShareButton }>
           <img src={ shareIcon } alt="botão de compartilhar" />
@@ -59,7 +63,9 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
       </section>
       {
         shareButtonClicked && (
-          <span>Link Copied!</span>
+          <MessageLinkCopied $url={ url }>
+            <span>Link Copied!</span>
+          </MessageLinkCopied>
         )
       }
     </ButtonsContainer>
@@ -69,6 +75,7 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true }) {
 ShareAndFavorite.propTypes = {
   showFavoriteButton: propTypes.bool,
   pathname: PropTypes.string,
+  url: PropTypes.string,
   recipe: PropTypes.shape({
     id: PropTypes.number,
     type: PropTypes.string,

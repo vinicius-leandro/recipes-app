@@ -32,7 +32,6 @@ const HeaderContainer = styled.section`
   section {
     top: 0.5vh;
     right: 2vw;
-    width: 3.5rem;
   }
 
   h1 {
@@ -45,12 +44,6 @@ const HeaderContainer = styled.section`
     font-size: 20px;
     letter-spacing: 2px;
   }
-
-  /* figure {
-    img {
-      width: 100vw;
-  }
-  } */
 `;
 
 export default HeaderContainer;
