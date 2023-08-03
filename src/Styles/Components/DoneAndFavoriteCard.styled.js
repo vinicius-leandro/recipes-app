@@ -58,18 +58,18 @@ const CardInfoContainer = styled.section`
 
   section {
     height: 30%;
-
+    width: auto;
     p {
       font-size: 15px;
     }
 
     span {
       width: fit-content;
-      display: flex;
       background-color: #D9D9D9;
       border-radius: 20px;
       padding: 0.3rem;
       color: #797D86;
+      font-size: 13px;
     }
   }
   ${(props) => props.$isFavorite && `

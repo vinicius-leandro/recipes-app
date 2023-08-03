@@ -21,6 +21,7 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
       setIsFavoritePage(false);
     }
   }, [pathname, setShowFavoriteButton]);
+
   return (
     <DoneAndFavoriteCard $isFavorite={ isFavoritePage }>
       <Link to={ path }>
@@ -48,13 +49,14 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
             </section>
           )
         }
-        {
-          type === 'food' && page === 'done recipes' && tags !== null && (
-            <section>
-              <span>{tags}</span>
-            </section>
-          )
-        }
+        <section>
+          {
+            tags.split(', ').map((tag) => type === 'food'
+            && page === 'done recipes' && tags !== null && (
+              <span key={ tag }>{tag}</span>
+            ))
+          }
+        </section>
       </CardInfoContainer>
       <ShareButtonContainer $isFavorite={ isFavoritePage }>
         <ShareAndFavorite
