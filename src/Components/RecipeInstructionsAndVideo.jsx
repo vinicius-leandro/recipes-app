@@ -4,14 +4,18 @@ import {
   InstructionsContainer, VideoContainer,
 } from '../Styles/Components/RecipeInstructionsAndVideo.styled';
 
-export default function RecipeInstructionsAndVideo({ instructions, ytUrl = '', showYt }) {
+function RecipeInstructionsAndVideo({ instructions = '', ytUrl = '', showYt }) {
   const INITIAL_CODE_VIDEO = 33;
   return (
     <>
       <InstructionsContainer>
         <h2>Instructions</h2>
         <div>
-          <p>{instructions}</p>
+          {
+            instructions.split('\n').map((paragraph, index) => (
+              <p key={ index }>{paragraph}</p>
+            ))
+          }
         </div>
       </InstructionsContainer>
       {
@@ -40,3 +44,5 @@ RecipeInstructionsAndVideo.propTypes = {
   ytUrl: PropTypes.string,
   showYt: PropTypes.bool,
 }.isRequired;
+
+export default RecipeInstructionsAndVideo;

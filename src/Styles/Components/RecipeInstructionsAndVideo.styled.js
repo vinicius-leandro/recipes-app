@@ -12,7 +12,11 @@ const InstructionsContainer = styled.section`
     margin-top: 0.5rem;
     border: 1px solid #b1b1b1;
     border-radius: 7px;
-    padding: 1rem 0.7rem;
+    padding: 1rem 0.7rem 0.5rem 0.7rem;
+
+    p {
+      margin-bottom: 0.5rem;
+    }
   }
 `;
 
