@@ -6,7 +6,6 @@ import {
 
 export default function RecipeInstructionsAndVideo({ instructions, ytUrl = '', showYt }) {
   const INITIAL_CODE_VIDEO = 33;
-
   return (
     <>
       <InstructionsContainer>
