@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getGenericRecipes } from '../Service/requests';
 import {
   ControledCarouselContainer, CarouselCard,
@@ -13,6 +13,8 @@ export default function ControlledCarousel() {
   const LIMIT = 6;
   const recipeImage = pathname.includes('food') ? 'strDrinkThumb' : 'strMealThumb';
   const recipeName = pathname.includes('food') ? 'strDrink' : 'strMeal';
+  const id = pathname.includes('food') ? 'idDrink' : 'idMeal';
+  const page = pathname.includes('food') ? 'drinks' : 'foods';
   useEffect(() => {
     const foodOrDrink = pathname.includes('food') ? 'drinks' : 'meals';
     const getRecipe = async () => {
@@ -45,13 +47,15 @@ export default function ControlledCarousel() {
           itemClass="carousel-item-padding-40-px"
         >
           {
-            recommendations.slice(0, LIMIT).map((recipe) => (
-              <CarouselCard key={ recipe[recipeName] }>
-                <figure>
-                  <img src={ recipe[recipeImage] } alt={ recipe[recipeName] } />
-                </figure>
-                <h3>{recipe[recipeName]}</h3>
-              </CarouselCard>
+            recommendations.slice(0, LIMIT).map((recipe, index) => (
+              <Link to={ `/${page}/${recipe[id]}` } key={ index }>
+                <CarouselCard>
+                  <figure>
+                    <img src={ recipe[recipeImage] } alt={ recipe[recipeName] } />
+                  </figure>
+                  <h3>{recipe[recipeName]}</h3>
+                </CarouselCard>
+              </Link>
             ))
           }
         </Carousel>

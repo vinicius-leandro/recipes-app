@@ -6,11 +6,15 @@ const ControledCarouselContainer = styled.section`
   h2 {
     font-weight: 700;
     font-size: 25px;
-    margin-left: 1.2rem;
+    margin-left: 0.7rem;
   }
 
   section {
     margin-top: 0.5rem;
+  }
+
+  a{
+    text-decoration: none;
   }
 `;
 

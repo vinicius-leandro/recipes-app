@@ -4,7 +4,7 @@ import {
   InstructionsContainer, VideoContainer,
 } from '../Styles/Components/RecipeInstructionsAndVideo.styled';
 
-export default function RecipeInstructionsAndVideo({ instructions, ytUrl, showYt }) {
+export default function RecipeInstructionsAndVideo({ instructions, ytUrl = '', showYt }) {
   const INITIAL_CODE_VIDEO = 33;
 
   return (
