@@ -9,7 +9,7 @@ import {
 export default function DoneAndFavoriteCards({ recipe, page }) {
   const { pathname } = useLocation();
   const [showFavoriteButton, setShowFavoriteButton] = useState(true);
-  const [isFavorite, setIsFavorite] = useState(true);
+  const [isFavoritePage, setIsFavoritePage] = useState(true);
   const {
     id, image, name, nationality, category, date, tags, type, alcoholicOrNot,
   } = recipe;
@@ -18,17 +18,17 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
   useEffect(() => {
     if (pathname.includes('done')) {
       setShowFavoriteButton(false);
-      setIsFavorite(false);
+      setIsFavoritePage(false);
     }
   }, [pathname, setShowFavoriteButton]);
   return (
-    <DoneAndFavoriteCard $isFavorite={ isFavorite }>
+    <DoneAndFavoriteCard $isFavorite={ isFavoritePage }>
       <Link to={ path }>
         <figure>
           <img src={ image } alt="Foto da receita" />
         </figure>
       </Link>
-      <CardInfoContainer $isFavorite={ isFavorite }>
+      <CardInfoContainer $isFavorite={ isFavoritePage }>
         <div>
           <Link to={ path }>
             <h2>{name}</h2>
@@ -56,7 +56,7 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
           )
         }
       </CardInfoContainer>
-      <ShareButtonContainer $isFavorite={ isFavorite }>
+      <ShareButtonContainer $isFavorite={ isFavoritePage }>
         <ShareAndFavorite
           showFavoriteButton={ showFavoriteButton }
           recipe={ recipe }

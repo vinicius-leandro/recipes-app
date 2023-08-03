@@ -13,7 +13,8 @@ import {
 } from '../Styles/Components/ShareAndFavorite.styled';
 
 function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true, url }) {
-  const { isFavorite, setIsFavorite } = useContext(RecipesContext);
+  const { setChanging } = useContext(RecipesContext);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [shareButtonClicked, setShareButtonClicked] = useState(false);
   const favoriteButtonIcon = !isFavorite ? emptyHeartIcon : fullHeartIcon;
 
@@ -43,6 +44,7 @@ function ShareAndFavorite({ pathname, recipe, showFavoriteButton = true, url }) 
       saveLocalStorage('favoriteRecipes', newFavoriteRecipes);
     }
     setIsFavorite((prevState) => !prevState);
+    setChanging((prevState) => !prevState);
   };
 
   return (
