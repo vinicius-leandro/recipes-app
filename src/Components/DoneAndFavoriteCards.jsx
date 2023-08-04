@@ -51,10 +51,12 @@ export default function DoneAndFavoriteCards({ recipe, page }) {
         }
         <section>
           {
-            tags.split(', ').map((tag) => type === 'food'
-            && page === 'done recipes' && tags !== null && (
-              <span key={ tag }>{tag}</span>
-            ))
+            tags !== undefined && (
+              tags.split(', ').map((tag) => type === 'food'
+              && page === 'done recipes' && tags !== null && (
+                <span key={ tag }>{tag}</span>
+              ))
+            )
           }
         </section>
       </CardInfoContainer>
